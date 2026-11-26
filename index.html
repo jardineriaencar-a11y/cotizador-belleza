@@ -563,7 +563,7 @@ let cfg = {
   resDiasMax: 30,
   resHoraIni: '08:00',
   resHoraFin: '19:00',
-  resDiasSem:,
+  resDiasSem: [1, 2, 3, 4, 5, 6, 7], // Lunes a Domingo
 
   pxh: 0, fle: 30000, desp: 0, mar: 0,
   mats: [
@@ -700,9 +700,8 @@ if (reservaOwnerUid) {
   });
   window.addEventListener('beforeunload', () => marcarPresencia(false));
   }
-}
-
 });
+}
 
 
 if ($('bOutNoAuth')) $('bOutNoAuth').onclick = () => auth.signOut();
@@ -886,7 +885,7 @@ function aplicarCfgUI() {
   if ($('cfgResHoraIni')) $('cfgResHoraIni').value = cfg.resHoraIni || '08:00';
   if ($('cfgResHoraFin')) $('cfgResHoraFin').value = cfg.resHoraFin || '19:00';
   if ($('cfgResDiasSem')) {
-    const diasActivos = Array.isArray(cfg.resDiasSem) ? cfg.resDiasSem.map(Number) :;
+const diasActivos = Array.isArray(cfg.resDiasSem) ? cfg.resDiasSem.map(Number) : [];
     $('cfgResDiasSem').querySelectorAll('input[type="checkbox"]').forEach(chk => {
       chk.checked = diasActivos.includes(Number(chk.value));
     });
@@ -1967,7 +1966,7 @@ function actualizarHorariosPublicos() {
   const [y, m, d] = fecStr.split('-').map(Number);
   const fechaObj = new Date(y, m - 1, d);
   const diaSem = fechaObj.getDay();
-  const diasHab = Array.isArray(resPubCfg.resDiasSem) ? resPubCfg.resDiasSem.map(Number) :;
+  const diasHab = Array.isArray(resPubCfg.resDiasSem) ? resPubCfg.resDiasSem.map(Number) : [];
 
   if (!diasHab.includes(diaSem)) {
     sel.innerHTML = '<option value="">Cerrado este día</option>';
