@@ -8,7 +8,6 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Cotizador Bienestar">
-  <link rel="manifest" href="/manifest.json?v=2">
   <link rel="icon" type="image/svg+xml" href="/icon.svg?v=2">
   <link rel="apple-touch-icon" href="/icon.svg?v=2">
 
@@ -1782,40 +1781,41 @@ if ('serviceWorker' in navigator) {
     c.width = size; c.height = size;
     const ctx = c.getContext('2d');
     const r = size * 0.22;
+
     ctx.fillStyle = '#065f46';
     ctx.beginPath();
-    ctx.roundRect(0, 0, size, size, r);
+    ctx.moveTo(r, 0);
+    ctx.lineTo(size - r, 0);
+    ctx.quadraticCurveTo(size, 0, size, r);
+    ctx.lineTo(size, size - r);
+    ctx.quadraticCurveTo(size, size, size - r, size);
+    ctx.lineTo(r, size);
+    ctx.quadraticCurveTo(0, size, 0, size - r);
+    ctx.lineTo(0, r);
+    ctx.quadraticCurveTo(0, 0, r, 0);
+    ctx.closePath();
     ctx.fill();
 
-    ctx.fillStyle = '#047857';
-    const pad = size * 0.08;
+    // Pétalos laterales (verde menta claro)
+    ctx.fillStyle = '#a7f3d0';
     ctx.beginPath();
-    ctx.roundRect(pad, pad, size - pad * 2, size - pad * 2, r * 0.75);
+    ctx.ellipse(size * 0.36, size * 0.54, size * 0.12, size * 0.24, -0.42, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(size * 0.64, size * 0.54, size * 0.12, size * 0.24, 0.42, 0, Math.PI * 2);
     ctx.fill();
 
-    // Dibujo de serrucho/carpintería centrado
-    ctx.save();
-    ctx.translate(size * 0.5, size * 0.5);
-    ctx.rotate(-Math.PI / 5);
-    ctx.fillStyle = '#ecfdf5';
-    ctx.fillRect(-size * 0.28, -size * 0.06, size * 0.44, size * 0.12);
-    ctx.fillStyle = '#f59e0b';
-    for (let x = -size * 0.26; x < size * 0.12; x += size * 0.075) {
-      ctx.beginPath();
-      ctx.moveTo(x, size * 0.06);
-      ctx.lineTo(x + size * 0.038, size * 0.11);
-      ctx.lineTo(x + size * 0.075, size * 0.06);
-      ctx.fill();
-    }
-    ctx.fillStyle = '#10b981';
+    // Pétalo central (verde esmeralda brillante)
+    ctx.fillStyle = '#34d399';
     ctx.beginPath();
-    ctx.roundRect(size * 0.14, -size * 0.09, size * 0.15, size * 0.18, size * 0.04);
+    ctx.ellipse(size * 0.50, size * 0.48, size * 0.13, size * 0.28, 0, 0, Math.PI * 2);
     ctx.fill();
-    ctx.fillStyle = '#065f46';
+
+    // Detalle dorado central
+    ctx.fillStyle = '#fbbf24';
     ctx.beginPath();
-    ctx.arc(size * 0.22, 0, size * 0.032, 0, Math.PI * 2);
+    ctx.arc(size * 0.50, size * 0.79, size * 0.04, 0, Math.PI * 2);
     ctx.fill();
-    ctx.restore();
 
     return c.toDataURL('image/png');
   }
@@ -1829,9 +1829,9 @@ if ('serviceWorker' in navigator) {
   document.head.appendChild(linkApple);
 
   const manifest = {
-    name: 'Cotizador de Muebles a Medida',
-    short_name: 'Cotizador Muebles',
-    description: 'Presupuestos, despiece y planos de corte 2D para carpintería',
+    name: 'Cotizador Belleza & Bienestar',
+    short_name: 'Cotizador Spa',
+    description: 'Presupuestos profesionales para centros de estética, masajes y bienestar',
     start_url: window.location.origin + '/',
     scope: window.location.origin + '/',
     display: 'standalone',
