@@ -125,6 +125,83 @@
 </head>
 <body>
 <div class="c">
+
+    <!-- VISTA PÚBLICA DE RESERVAS PARA CLIENTES (SIN LOGIN) -->
+  <div id="vReserva" class="hd">
+    <div style="text-align:center;border-bottom:2px solid #a7f3d0;padding-bottom:12px;margin-bottom:14px">
+      <img id="resPubLogo" src="" alt="Logo" style="max-height:64px;max-width:170px;margin-bottom:6px;display:none">
+      <h1 id="resPubNom" style="font-size:1.3rem;color:#065f46;margin-bottom:2px">🌿 Reserva de Turnos</h1>
+      <p id="resPubSub" style="font-size:.82rem;color:#57534e">Selecciona tus servicios, productos y el horario disponible que prefieras</p>
+    </div>
+
+    <div id="resPubLoader" style="text-align:center;padding:30px;color:#047857;font-weight:600">⏳ Cargando catálogo y horarios disponibles...</div>
+
+    <div id="resPubBody" class="hd">
+      <div class="pl" style="margin-bottom:12px">
+        <label style="color:#065f46;font-size:.9rem;margin-bottom:8px">💆 1. Elige tus Servicios y Tratamientos</label>
+        <div id="resPubServs" style="display:flex;flex-direction:column;gap:8px"></div>
+      </div>
+
+      <div class="pl" id="resPubHMapWrap" style="background:#fafaf9;border-color:#d6d3d1;margin-bottom:12px">
+        <label style="color:#44403c;font-size:.9rem;margin-bottom:8px">🧴 2. Productos o Kits Opcionales</label>
+        <div id="resPubHers" style="display:flex;flex-direction:column;gap:8px"></div>
+      </div>
+
+      <div class="box" style="margin-top:0;border-top:none;padding-top:4px">
+        <label style="color:#065f46;font-size:.9rem;margin-bottom:8px">📅 3. Fecha, Horario y Tus Datos</label>
+        <div class="row2">
+          <div>
+            <label>Fecha del Turno</label>
+            <input type="date" id="resPubFec">
+          </div>
+          <div>
+            <label>Horario Disponible</label>
+            <select id="resPubHora"><option value="">Elige fecha y servicio...</option></select>
+          </div>
+        </div>
+        <div id="resPubHoraInfo" style="font-size:.76rem;color:#047857;margin:-6px 0 10px 0"></div>
+
+        <div class="fg">
+          <label>Modalidad de Atención</label>
+          <select id="resPubMod">
+            <option value="local">🏢 En el Local / Gabinete</option>
+            <option value="domicilio">🚗 Servicio a Domicilio</option>
+          </select>
+        </div>
+
+        <div class="row2">
+          <div><label>Tu Nombre y Apellido *</label><input type="text" id="resPubCli" placeholder="Ej: María González"></div>
+          <div><label>Tu WhatsApp *</label><input type="tel" id="resPubTel" placeholder="Ej: 0981 123 456"></div>
+        </div>
+        <div class="fg" id="resPubDirWrap" style="display:none">
+          <label>Dirección para servicio a domicilio *</label>
+          <input type="text" id="resPubDir" placeholder="Barrio, calle y referencia">
+        </div>
+        <div class="fg">
+          <label>Observación o preferencia (Opcional)</label>
+          <input type="text" id="resPubNota" placeholder="Ej: Preferencia de horario o consulta">
+        </div>
+      </div>
+
+      <div class="res" style="position:sticky;bottom:8px;z-index:20;box-shadow:0 6px 20px rgba(6,95,70,.18)">
+        <div class="r"><span>Servicios y productos elegidos:</span><strong id="resPubCant">0 ítem(s)</strong></div>
+        <div class="r"><span>Duración total estimada:</span><strong id="resPubDur">0 min</strong></div>
+        <div class="r" id="resPubRowViat" style="display:none"><span>Viático domicilio:</span><strong id="resPubViat">Gs. 0</strong></div>
+        <div class="tot" style="margin-top:6px"><span>TOTAL ESTIMADO:</span><span id="resPubTot">Gs. 0</span></div>
+        <button type="button" class="btn bwaf" id="bEnviarReservaPub" style="width:100%;margin-top:10px;padding:12px;font-size:.95rem">📲 Confirmar Solicitud de Reserva</button>
+      </div>
+    </div>
+
+    <div id="resPubOk" class="hd" style="text-align:center;padding:24px 12px;background:#f0fdf4;border:1.5px solid #10b981;border-radius:12px">
+      <div style="font-size:2.6rem;margin-bottom:8px">✅</div>
+      <h2 style="color:#065f46;font-size:1.15rem;margin-bottom:6px">¡Solicitud de Turno Enviada!</h2>
+      <p style="font-size:.86rem;color:#44403c;margin-bottom:14px;line-height:1.5">Tu pedido ya quedó registrado en la agenda del local. Toca el botón de abajo para confirmar también por WhatsApp.</p>
+      <a id="btnWaReservaOk" href="#" target="_blank" class="btn bwaf" style="display:block;text-decoration:none;margin-bottom:10px">💬 Enviar Resumen por WhatsApp</a>
+      <button type="button" class="btn bclr" onclick="location.reload()" style="width:100%">🔄 Hacer otra reserva</button>
+    </div>
+  </div>
+
+
   <div id="vLog" style="text-align:center;padding:28px 10px">
     <h1 style="margin-bottom:8px">🌿 Cotizador Belleza & Bienestar</h1>
     <p style="color:#78716c;font-size:.9rem;margin-bottom:18px">Inicia sesión con tu cuenta de Google para gestionar tus servicios, tratamientos, productos y presupuestos.</p>
@@ -165,6 +242,7 @@
 
     <div class="nav hd np" id="navMenu">
       <button type="button" data-sec="secCot">✨ Nuevo Presupuesto</button>
+      <button type="button" data-sec="secRes">📅 Solicitudes Web (<span id="resCnt">0</span>)</button>
       <button type="button" data-sec="secHis">📋 Historial (<span id="hCnt">0</span>)</button>
       <button type="button" data-sec="secCom">🛒 Compras e Insumos</button>
       <button type="button" data-sec="secOrd">🧴 Ficha de Preparación</button>
@@ -255,6 +333,19 @@
           <input type="text" id="busqHis" placeholder="🔍 Filtrar por cliente o paquete..." style="max-width:260px;padding:7px 10px;font-size:.82rem;margin:0">
         </div>
         <div id="hLst"></div>
+      </div>
+    </div>
+
+
+    <!-- 1C. SOLICITUDES DE RESERVA WEB -->
+    <div id="secRes" class="hd">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+          <h3 style="margin:0">📅 Solicitudes de Reserva de Clientes</h3>
+          <button type="button" class="bm" style="background:#047857" onclick="cargarReservasOwner()">🔄 Actualizar</button>
+        </div>
+        <p style="font-size:.78rem;color:#78716c;margin-bottom:10px">Aquí aparecen los turnos y paquetes que tus clientes arman desde tu enlace público.</p>
+        <div id="resOwnerLst"></div>
       </div>
     </div>
 
@@ -378,6 +469,55 @@
         <input type="hidden" id="cfgMar" value="0">
       </div>
       <button type="button" class="bm" id="bResetNum" style="background:#57534e;margin-bottom:8px">🔄 Reiniciar contador de presupuestos a 0001</button>
+      
+            <div class="card" style="border-color:#10b981;background:#f0fdf4">
+        <h3>📲 Enlace Público de Reservas y Agenda Online</h3>
+        <p style="font-size:.76rem;color:#57534e;margin-bottom:8px">Comparte este enlace en tu WhatsApp o Instagram para que tus clientes elijan servicios, productos y horarios disponibles:</p>
+        <div class="lrow" style="margin-bottom:10px">
+          <input type="text" id="cfgUrlReserva" readonly style="font-size:.78rem;background:#fff;color:#065f46;font-weight:600">
+          <button type="button" class="bm" style="background:#065f46;white-space:nowrap;padding:8px 11px" id="bCopiarUrlRes">📋 Copiar</button>
+        </div>
+
+        <div class="row2" style="margin-bottom:8px">
+          <div>
+            <label>Precios en Menú Público</label>
+            <select id="cfgResMostrarPrecios">
+              <option value="si">💰 Mostrar precios en Gs.</option>
+              <option value="no">💬 Ocultar (Mostrar "Consultar")</option>
+            </select>
+          </div>
+          <div>
+            <label>Días futuros habilitados</label>
+            <input type="number" id="cfgResDiasMax" value="30" min="1" max="180">
+          </div>
+        </div>
+
+        <div class="row2" style="margin-bottom:8px">
+          <div>
+            <label>Hora Apertura Local</label>
+            <input type="time" id="cfgResHoraIni" value="08:00">
+          </div>
+          <div>
+            <label>Hora Cierre Local</label>
+            <input type="time" id="cfgResHoraFin" value="19:00">
+          </div>
+        </div>
+
+        <div class="fg" style="margin-bottom:0">
+          <label>Días de Atención (marca los días abiertos)</label>
+          <div id="cfgResDiasSem" style="display:flex;gap:6px;flex-wrap:wrap;font-size:.8rem">
+            <label style="display:inline-flex;align-items:center;gap:4px;background:#fff;padding:5px 8px;border-radius:7px;border:1px solid #d6d3d1"><input type="checkbox" value="1" checked style="width:auto"> Lun</label>
+            <label style="display:inline-flex;align-items:center;gap:4px;background:#fff;padding:5px 8px;border-radius:7px;border:1px solid #d6d3d1"><input type="checkbox" value="2" checked style="width:auto"> Mar</label>
+            <label style="display:inline-flex;align-items:center;gap:4px;background:#fff;padding:5px 8px;border-radius:7px;border:1px solid #d6d3d1"><input type="checkbox" value="3" checked style="width:auto"> Mié</label>
+            <label style="display:inline-flex;align-items:center;gap:4px;background:#fff;padding:5px 8px;border-radius:7px;border:1px solid #d6d3d1"><input type="checkbox" value="4" checked style="width:auto"> Jue</label>
+            <label style="display:inline-flex;align-items:center;gap:4px;background:#fff;padding:5px 8px;border-radius:7px;border:1px solid #d6d3d1"><input type="checkbox" value="5" checked style="width:auto"> Vie</label>
+            <label style="display:inline-flex;align-items:center;gap:4px;background:#fff;padding:5px 8px;border-radius:7px;border:1px solid #d6d3d1"><input type="checkbox" value="6" checked style="width:auto"> Sáb</label>
+            <label style="display:inline-flex;align-items:center;gap:4px;background:#fff;padding:5px 8px;border-radius:7px;border:1px solid #d6d3d1"><input type="checkbox" value="0" style="width:auto"> Dom</label>
+          </div>
+        </div>
+      </div>
+
+
       <button type="button" class="btn bcfg" id="bSavCfg">💾 Guardar Toda la Configuración</button>
       <div class="box" style="margin-top:12px;border-color:#d6d3d1">
         <label style="color:#065f46;margin-bottom:6px">☁️ Respaldo y Exportación de Datos</label>
@@ -419,6 +559,12 @@ let cots = [], coms = [];
 let cfg = {
   tallNom: 'Centro de Belleza & Bienestar', tallTel: '',
   notaPdf: 'Presupuesto válido por 15 días. Seña del 30% para reserva de turno.',
+  resMostrarPrecios: 'si',
+  resDiasMax: 30,
+  resHoraIni: '08:00',
+  resHoraFin: '19:00',
+  resDiasSem:,
+
   pxh: 0, fle: 30000, desp: 0, mar: 0,
   mats: [
     { nom: 'Masaje Relajante Cuerpo Completo', anc: 60, alt: 1, pre: 150000 },
@@ -462,7 +608,17 @@ firebase.initializeApp(firebaseConfig);
 const ADMIN_EMAIL = 'jardineria.encar@gmail.com';
 const MI_WHATSAPP_VENTAS = '595972710742';
 
-auth.onAuthStateChanged(async user => {
+const urlParams = new URLSearchParams(window.location.search);
+const reservaOwnerUid = urlParams.get('reserva');
+
+if (reservaOwnerUid) {
+  $('vLog').classList.add('hd');
+  $('vApp').classList.add('hd');
+  $('noAuthView')?.classList.add('hd');
+  $('vReserva').classList.remove('hd');
+  iniciarModoReservaPublica(reservaOwnerUid);
+} else {
+  auth.onAuthStateChanged(async user => {
   if (!user) {
     uid = null;
     $('vLog').classList.remove('hd');
@@ -543,6 +699,7 @@ auth.onAuthStateChanged(async user => {
     marcarPresencia(document.visibilityState === 'visible');
   });
   window.addEventListener('beforeunload', () => marcarPresencia(false));
+  }
 }
 
 });
@@ -565,6 +722,7 @@ function iniciarDatos() {
     coms = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     renderComs(); updEst();
   });
+  cargarReservasOwner();
 }
 
 window.exportarExcelCSV = function() {
@@ -718,6 +876,21 @@ function aplicarCfgUI() {
   calc();
   if (typeof renderMods === 'function') renderMods();
   if (typeof renderHers === 'function') renderHers();
+
+
+  if ($('cfgUrlReserva') && uid) {
+    $('cfgUrlReserva').value = window.location.origin + window.location.pathname + '?reserva=' + uid;
+  }
+  if ($('cfgResMostrarPrecios')) $('cfgResMostrarPrecios').value = cfg.resMostrarPrecios || 'si';
+  if ($('cfgResDiasMax')) $('cfgResDiasMax').value = cfg.resDiasMax || 30;
+  if ($('cfgResHoraIni')) $('cfgResHoraIni').value = cfg.resHoraIni || '08:00';
+  if ($('cfgResHoraFin')) $('cfgResHoraFin').value = cfg.resHoraFin || '19:00';
+  if ($('cfgResDiasSem')) {
+    const diasActivos = Array.isArray(cfg.resDiasSem) ? cfg.resDiasSem.map(Number) :;
+    $('cfgResDiasSem').querySelectorAll('input[type="checkbox"]').forEach(chk => {
+      chk.checked = diasActivos.includes(Number(chk.value));
+    });
+  }
 }
 
 
@@ -1569,15 +1742,465 @@ $('bSavCat').onclick = async () => {
   renderMods(); renderHers(); calc();
   alert('✅ Catálogo de tableros e insumos guardado.');
 };
+
 $('bSavCfg').onclick = async () => {
-  cfg.tallNom = $('cfgTallNom').value.trim() || 'Cotizador de Belleza & Bienestar';
+  cfg.tallNom = $('cfgTallNom').value.trim() || 'Centro de Belleza & Bienestar';
   cfg.tallTel = $('cfgTallTel').value.trim();
+  if ($('cfgNotaPdf')) cfg.notaPdf = $('cfgNotaPdf').value.trim();
   cfg.fle = parseFloat($('cfgFle').value) || 0;
   cfg.desp = parseFloat($('cfgDesp').value) || 0;
   cfg.mar = parseFloat($('cfgMar').value) || 0;
+
+  cfg.resMostrarPrecios = $('cfgResMostrarPrecios')?.value || 'si';
+  cfg.resDiasMax = parseInt($('cfgResDiasMax')?.value, 10) || 30;
+  cfg.resHoraIni = $('cfgResHoraIni')?.value || '08:00';
+  cfg.resHoraFin = $('cfgResHoraFin')?.value || '19:00';
+  if ($('cfgResDiasSem')) {
+    cfg.resDiasSem = Array.from($('cfgResDiasSem').querySelectorAll('input[type="checkbox"]:checked')).map(c => Number(c.value));
+  }
+
   await db.collection('users').doc(uid).collection('settings').doc('general').set(cfg);
-  aplicarCfgUI(); calc(); alert('✅ Configuración del taller y precios guardados.');
+  aplicarCfgUI();
+  calc();
+  alert('✅ Configuración del centro, tarifas y agenda guardada.');
 };
+
+if ($('bCopiarUrlRes')) {
+  $('bCopiarUrlRes').onclick = () => {
+    const inp = $('cfgUrlReserva');
+    if (!inp || !inp.value) return;
+    navigator.clipboard?.writeText(inp.value);
+    const prev = $('bCopiarUrlRes').textContent;
+    $('bCopiarUrlRes').textContent = '✅ Copiado';
+    setTimeout(() => { $('bCopiarUrlRes').textContent = prev; }, 2000);
+  };
+}
+
+let resPubCfg = null;
+let resPubSelServs = {};
+let resPubSelHers = {};
+
+function horaAMin(hhmm) {
+  if (!hhmm || !hhmm.includes(':')) return 0;
+  const [h, m] = hhmm.split(':').map(Number);
+  return (h || 0) * 60 + (m || 0);
+}
+
+function minAHora(mins) {
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+}
+
+async function iniciarModoReservaPublica(ownerUid) {
+  try {
+    const docSnap = await db.collection('users').doc(ownerUid).collection('settings').doc('general').get();
+    if (!docSnap.exists) {
+      $('resPubLoader').innerHTML = '❌ Este enlace de reservas no está disponible o el centro aún no configuró su catálogo.';
+      return;
+    }
+    resPubCfg = docSnap.data();
+
+    $('resPubNom').textContent = '🌿 ' + (resPubCfg.tallNom || 'Centro de Belleza & Bienestar');
+    if (resPubCfg.tallLogo) {
+      $('resPubLogo').src = resPubCfg.tallLogo;
+      $('resPubLogo').style.display = 'inline-block';
+    }
+
+    const hoy = new Date();
+    const maxDias = parseInt(resPubCfg.resDiasMax, 10) || 30;
+    const lim = new Date();
+    lim.setDate(hoy.getDate() + maxDias);
+
+    const fmtIso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    $('resPubFec').min = fmtIso(hoy);
+    $('resPubFec').max = fmtIso(lim);
+
+    renderCatalogoPublico();
+    actualizarResumenPublico();
+
+    $('resPubFec').onchange = actualizarHorariosPublicos;
+    $('resPubMod').onchange = () => {
+      $('resPubDirWrap').style.display = $('resPubMod').value === 'domicilio' ? 'block' : 'none';
+      actualizarResumenPublico();
+    };
+    $('bEnviarReservaPub').onclick = () => enviarSolicitudReservaPublica(ownerUid);
+
+    $('resPubLoader').classList.add('hd');
+    $('resPubBody').classList.remove('hd');
+  } catch (e) {
+    $('resPubLoader').innerHTML = '❌ Error al cargar el catálogo: ' + e.message;
+  }
+}
+
+
+
+function renderCatalogoPublico() {
+  const mostrarPre = (resPubCfg.resMostrarPrecios || 'si') === 'si';
+  const contS = $('resPubServs');
+  contS.innerHTML = '';
+
+  (resPubCfg.mats || []).forEach((m, idx) => {
+    const cant = resPubSelServs[idx] || 0;
+    const dur = parseInt(m.anc, 10) || 60;
+    const preTxt = mostrarPre ? gs(m.pre || 0) : 'Consultar';
+    const card = document.createElement('div');
+    card.style.cssText = `background:#fff;border:1.5px solid ${cant > 0 ? '#10b981' : '#e7e5e4'};border-radius:10px;padding:10px;display:flex;justify-content:space-between;align-items:center;gap:8px`;
+    card.innerHTML = `
+      <div style="flex:1">
+        <div style="font-weight:700;font-size:.88rem;color:#1c1917">${m.nom}</div>
+        <div style="font-size:.76rem;color:#047857;margin-top:2px">⏱️ ${dur} min • <strong>${preTxt}</strong></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        ${cant > 0 ? `<button type="button" class="bm bdel" data-sdec="${idx}" style="padding:5px 10px">−</button><strong style="min-width:18px;text-align:center">${cant}</strong>` : ''}
+        <button type="button" class="bm" style="background:#065f46;padding:6px 11px" data-sinc="${idx}">${cant > 0 ? '+' : '+ Elegir'}</button>
+      </div>`;
+    contS.appendChild(card);
+  });
+
+  contS.querySelectorAll('[data-sinc]').forEach(b => b.onclick = () => {
+    const i = +b.dataset.sinc;
+    resPubSelServs[i] = (resPubSelServs[i] || 0) + 1;
+    renderCatalogoPublico();
+    actualizarResumenPublico();
+  });
+  contS.querySelectorAll('[data-sdec]').forEach(b => b.onclick = () => {
+    const i = +b.dataset.sdec;
+    if ((resPubSelServs[i] || 0) > 1) resPubSelServs[i]--;
+    else delete resPubSelServs[i];
+    renderCatalogoPublico();
+    actualizarResumenPublico();
+  });
+
+  const contH = $('resPubHers');
+  contH.innerHTML = '';
+  const listaH = resPubCfg.hers || [];
+  if (!listaH.length) {
+    $('resPubHMapWrap').style.display = 'none';
+    return;
+  }
+  $('resPubHMapWrap').style.display = 'block';
+
+  listaH.forEach((h, idx) => {
+    const cant = resPubSelHers[idx] || 0;
+    const preTxt = mostrarPre ? gs(h.pre || 0) : 'Consultar';
+    const card = document.createElement('div');
+    card.style.cssText = `background:#fff;border:1.5px solid ${cant > 0 ? '#10b981' : '#e7e5e4'};border-radius:10px;padding:9px;display:flex;justify-content:space-between;align-items:center;gap:8px`;
+    card.innerHTML = `
+      <div style="flex:1">
+        <div style="font-weight:600;font-size:.85rem;color:#292524">${h.nom}</div>
+        <div style="font-size:.75rem;color:#57534e"><strong>${preTxt}</strong></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        ${cant > 0 ? `<button type="button" class="bm bdel" data-hdec="${idx}" style="padding:4px 9px">−</button><strong style="min-width:18px;text-align:center">${cant}</strong>` : ''}
+        <button type="button" class="bm" style="background:#047857;padding:5px 10px" data-hinc="${idx}">${cant > 0 ? '+' : '+ Agregar'}</button>
+      </div>`;
+    contH.appendChild(card);
+  });
+
+  contH.querySelectorAll('[data-hinc]').forEach(b => b.onclick = () => {
+    const i = +b.dataset.hinc;
+    resPubSelHers[i] = (resPubSelHers[i] || 0) + 1;
+    renderCatalogoPublico();
+    actualizarResumenPublico();
+  });
+  contH.querySelectorAll('[data-hdec]').forEach(b => b.onclick = () => {
+    const i = +b.dataset.hdec;
+    if ((resPubSelHers[i] || 0) > 1) resPubSelHers[i]--;
+    else delete resPubSelHers[i];
+    renderCatalogoPublico();
+    actualizarResumenPublico();
+  });
+}
+
+function calcularTotalesPublicos() {
+  let durTot = 0, subTot = 0, cantItems = 0;
+  Object.entries(resPubSelServs).forEach(([idx, cant]) => {
+    const m = (resPubCfg.mats || [])[+idx];
+    if (m && cant > 0) {
+      durTot += (parseInt(m.anc, 10) || 60) * cant;
+      subTot += (parseFloat(m.pre) || 0) * cant;
+      cantItems += cant;
+    }
+  });
+  Object.entries(resPubSelHers).forEach(([idx, cant]) => {
+    const h = (resPubCfg.hers || [])[+idx];
+    if (h && cant > 0) {
+      subTot += (parseFloat(h.pre) || 0) * cant;
+      cantItems += cant;
+    }
+  });
+  const esDom = $('resPubMod').value === 'domicilio';
+  const viat = esDom ? (parseFloat(resPubCfg.fle) || 0) : 0;
+  return { durTot, subTot, viat, total: subTot + viat, cantItems };
+}
+
+function actualizarResumenPublico() {
+  const mostrarPre = (resPubCfg.resMostrarPrecios || 'si') === 'si';
+  const t = calcularTotalesPublicos();
+  $('resPubCant').textContent = `${t.cantItems} ítem(s)`;
+  $('resPubDur').textContent = t.durTot > 0 ? fmtDuracion(t.durTot) : '0 min';
+
+  if (mostrarPre) {
+    $('resPubRowViat').style.display = t.viat > 0 ? 'flex' : 'none';
+    $('resPubViat').textContent = gs(t.viat);
+    $('resPubTot').textContent = gs(t.total);
+  } else {
+    $('resPubRowViat').style.display = 'none';
+    $('resPubTot').textContent = 'A consultar';
+  }
+  actualizarHorariosPublicos();
+}
+
+function actualizarHorariosPublicos() {
+  const sel = $('resPubHora');
+  const info = $('resPubHoraInfo');
+  const fecStr = $('resPubFec').value;
+  const t = calcularTotalesPublicos();
+
+  if (!fecStr) {
+    sel.innerHTML = '<option value="">Selecciona una fecha primero...</option>';
+    info.textContent = '';
+    return;
+  }
+
+  const [y, m, d] = fecStr.split('-').map(Number);
+  const fechaObj = new Date(y, m - 1, d);
+  const diaSem = fechaObj.getDay();
+  const diasHab = Array.isArray(resPubCfg.resDiasSem) ? resPubCfg.resDiasSem.map(Number) :;
+
+  if (!diasHab.includes(diaSem)) {
+    sel.innerHTML = '<option value="">Cerrado este día</option>';
+    info.textContent = '⚠️ El local no atiende el día de la semana seleccionado.';
+    return;
+  }
+
+  const durNecesaria = t.durTot > 0 ? t.durTot : 60;
+  const minIni = horaAMin(resPubCfg.resHoraIni || '08:00');
+  const minFin = horaAMin(resPubCfg.resHoraFin || '19:00');
+  const paso = 30;
+
+  let opts = '<option value="">-- Elige un horario --</option>';
+  let count = 0;
+
+  const ahora = new Date();
+  const esHoy = fechaObj.toDateString() === ahora.toDateString();
+  const minAhora = ahora.getHours() * 60 + ahora.getMinutes() + 30;
+
+  for (let h = minIni; h + durNecesaria <= minFin; h += paso) {
+    if (esHoy && h < minAhora) continue;
+    const hIniTxt = minAHora(h);
+    const hFinTxt = minAHora(h + durNecesaria);
+    opts += `<option value="${hIniTxt} a ${hFinTxt}">${hIniTxt} a ${hFinTxt} (${durNecesaria} min)</option>`;
+    count++;
+  }
+
+  if (count === 0) {
+    sel.innerHTML = '<option value="">Sin bloques disponibles para esta duración</option>';
+    info.textContent = `⚠️ Para ${durNecesaria} min no quedan bloques dentro del horario (${resPubCfg.resHoraIni || '08:00'} a ${resPubCfg.resHoraFin || '19:00'}).`;
+  } else {
+    sel.innerHTML = opts;
+    info.textContent = `✅ ${count} horario(s) disponible(s) calculados para una duración de ${fmtDuracion(durNecesaria)}.`;
+  }
+}
+
+
+
+async function enviarSolicitudReservaPublica(ownerUid) {
+  const t = calcularTotalesPublicos();
+  if (t.cantItems === 0) { alert('Por favor elige al menos un servicio o producto.'); return; }
+  const fec = $('resPubFec').value;
+  const hora = $('resPubHora').value;
+  if (!fec || !hora) { alert('Selecciona la fecha y el horario disponible para tu turno.'); return; }
+  const cli = $('resPubCli').value.trim();
+  const tel = $('resPubTel').value.trim();
+  if (!cli || !tel) { alert('Ingresa tu nombre y número de WhatsApp para confirmar.'); return; }
+  const mod = $('resPubMod').value;
+  const dir = $('resPubDir').value.trim();
+  if (mod === 'domicilio' && !dir) { alert('Ingresa la dirección para el servicio a domicilio.'); return; }
+
+  const btn = $('bEnviarReservaPub');
+  btn.disabled = true; btn.textContent = '⏳ Enviando solicitud...';
+
+  try {
+    const servsArr = [];
+    Object.entries(resPubSelServs).forEach(([idx, cant]) => {
+      const m = (resPubCfg.mats || [])[+idx];
+      if (m && cant > 0) servsArr.push({ nom: m.nom, cant, ancho: parseInt(m.anc, 10) || 60, alto: parseFloat(m.pre) || 0 });
+    });
+    const hersArr = [];
+    Object.entries(resPubSelHers).forEach(([idx, cant]) => {
+      const h = (resPubCfg.hers || [])[+idx];
+      if (h && cant > 0) hersArr.push({ nom: h.nom, cant, pre: parseFloat(h.pre) || 0 });
+    });
+
+    const mostrarPre = (resPubCfg.resMostrarPrecios || 'si') === 'si';
+    const [yy, mm, dd] = fec.split('-');
+    const fecFmt = `${dd}/${mm}/${yy}`;
+
+    const reservaDoc = {
+      cli, tel, fec: fecFmt, fecIso: fec, hora,
+      mod: mod === 'domicilio' ? 'A domicilio' : 'En el local',
+      dir: mod === 'domicilio' ? dir : 'En el local / gabinete',
+      nota: $('resPubNota').value.trim(),
+      servs: servsArr,
+      hers: hersArr,
+      durTot: t.durTot,
+      viat: t.viat,
+      total: t.total,
+      mostrarPre,
+      estado: 'pendiente',
+      creadoEn: new Date().toISOString()
+    };
+
+    await db.collection('users').doc(ownerUid).collection('reservas').add(reservaDoc);
+
+    let msg = `🌿 *SOLICITUD DE RESERVA — ${(resPubCfg.tallNom || 'CENTRO DE BIENESTAR').toUpperCase()}*\n`;
+    msg += `👤 *Cliente:* ${cli}\n📞 *Tel:* ${tel}\n📅 *Fecha:* ${fecFmt}\n⏰ *Horario:* ${hora}\n📍 *Modalidad:* ${reservaDoc.mod}\n`;
+    if (mod === 'domicilio') msg += `🏠 *Dirección:* ${dir}\n`;
+    msg += `\n💆 *SERVICIOS:*\n`;
+    servsArr.forEach(s => { msg += `• ${s.cant}× ${s.nom} (${s.ancho} min)${mostrarPre ? ' — ' + gs(s.cant * s.alto) : ''}\n`; });
+    if (hersArr.length) {
+      msg += `\n🧴 *PRODUCTOS:*\n`;
+      hersArr.forEach(h => { msg += `• ${h.cant}× ${h.nom}${mostrarPre ? ' — ' + gs(h.cant * h.pre) : ''}\n`; });
+    }
+    if (mostrarPre) {
+      if (t.viat > 0) msg += `\n🚗 *Viático:* ${gs(t.viat)}`;
+      msg += `\n💰 *Total estimado:* ${gs(t.total)}`;
+    }
+    if (reservaDoc.nota) msg += `\n📝 *Nota:* ${reservaDoc.nota}`;
+
+    let telLocal = (resPubCfg.tallTel || '').replace(/\D/g, '');
+    if (telLocal.startsWith('0')) telLocal = '595' + telLocal.slice(1);
+    else if (telLocal.length === 9 && telLocal.startsWith('9')) telLocal = '595' + telLocal;
+
+    $('btnWaReservaOk').href = 'https://' + 'api.whatsapp' + '.com/send?' + (telLocal ? 'phone=' + telLocal + '&' : '') + 'text=' + encodeURIComponent(msg);
+    $('resPubBody').classList.add('hd');
+    $('resPubOk').classList.remove('hd');
+  } catch (e) {
+    alert('No se pudo registrar la reserva: ' + e.message);
+    btn.disabled = false; btn.textContent = '📲 Confirmar Solicitud de Reserva';
+  }
+}
+
+let reservasOwner = [];
+
+async function cargarReservasOwner() {
+  if (!uid) return;
+  try {
+    const snap = await db.collection('users').doc(uid).collection('reservas').orderBy('creadoEn', 'desc').get();
+    reservasOwner = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    if ($('resCnt')) $('resCnt').textContent = reservasOwner.filter(r => r.estado === 'pendiente').length;
+    renderReservasOwner();
+  } catch (e) {
+    console.error('Error cargando reservas:', e);
+  }
+}
+
+function renderReservasOwner() {
+  const bx = $('resOwnerLst');
+  if (!bx) return;
+  bx.innerHTML = '';
+
+  if (!reservasOwner.length) {
+    bx.innerHTML = '<div style="font-size:.82rem;color:#78716c;padding:8px 0">Aún no recibiste solicitudes desde tu enlace público de reservas.</div>';
+    return;
+  }
+
+  reservasOwner.forEach((r, idx) => {
+    const esPend = r.estado === 'pendiente';
+    const badge = esPend
+      ? '<span style="background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:6px;font-size:.72rem;font-weight:700">⏳ PENDIENTE</span>'
+      : '<span style="background:#dcfce7;color:#166534;padding:2px 7px;border-radius:6px;font-size:.72rem;font-weight:700">✅ CONVERTIDA</span>';
+
+    const detServs = (r.servs || []).map(s => `<div>• <strong>${s.cant}×</strong> ${s.nom} <span style="color:#78716c">(${s.ancho} min)</span></div>`).join('');
+    const detHers = (r.hers || []).map(h => `<div>• <strong>${h.cant}×</strong> ${h.nom}</div>`).join('');
+
+    const d = document.createElement('div');
+    d.className = 'hit';
+    d.innerHTML = `
+      <div class="hhd">
+        <span>👤 ${r.cli} <span style="font-weight:400;color:#57534e">(${r.tel})</span></span>
+        ${badge}
+      </div>
+      <div style="font-size:.79rem;color:#065f46;font-weight:600;margin:3px 0">📅 ${r.fec} • ⏰ ${r.hora} • 📍 ${r.mod}</div>
+      <div style="font-size:.78rem;color:#44403c;background:#f0fdf4;padding:7px;border-radius:7px;margin-top:4px;width:100%">
+        ${detServs}
+        ${detHers}
+        ${r.dir && r.mod === 'A domicilio' ? `<div style="margin-top:3px">🏠 <strong>Dir:</strong> ${r.dir}</div>` : ''}
+        ${r.nota ? `<div style="margin-top:3px;color:#78716c">📝 <em>${r.nota}</em></div>` : ''}
+        <div style="margin-top:4px;font-weight:700;color:#065f46">⏱️ ${fmtDuracion(r.durTot || 0)} • Total estimado: ${gs(r.total || 0)}</div>
+      </div>
+      <div class="hacts" style="margin-top:8px">
+        <button type="button" class="bm" style="background:#065f46" data-rescot="${idx}">✨ Cargar en Cotizador</button>
+        <button type="button" class="bm bwa" data-reswa="${idx}">💬 Confirmar Turno WA</button>
+        <button type="button" class="bm bdel" data-resdel="${idx}">🗑️</button>
+      </div>`;
+    bx.appendChild(d);
+  });
+
+  bx.querySelectorAll('[data-rescot]').forEach(b => b.onclick = async () => {
+    const r = reservasOwner[+b.dataset.rescot];
+    if (!r) return;
+
+    if ($('cli')) $('cli').value = r.cli || '';
+    if ($('tel')) $('tel').value = r.tel || '';
+    if ($('mue')) $('mue').value = `Reserva Web - ${r.fec} (${r.hora})`;
+    if ($('dir')) $('dir').value = `${r.fec} ${r.hora} - ${r.dir || r.mod}`;
+    if ($('fle')) $('fle').value = r.viat || 0;
+
+    mods = [{
+      nom: `Turno ${r.fec} (${r.hora})`,
+      abierto: true,
+      pzas: (r.servs || []).map(s => ({
+        nom: s.nom,
+        matNom: s.nom,
+        matIdx: '',
+        cant: s.cant || 1,
+        ancho: s.ancho || 60,
+        alto: s.alto || 0
+      }))
+    }];
+
+    hers = (r.hers || []).map(h => ({
+      nom: h.nom,
+      cant: h.cant || 1,
+      pre: h.pre || 0
+    }));
+
+    renderMods();
+    renderHers();
+    calc();
+
+    if (r.estado === 'pendiente' && r.id) {
+      await db.collection('users').doc(uid).collection('reservas').doc(r.id).update({ estado: 'convertida' }).catch(() => {});
+      cargarReservasOwner();
+    }
+
+    document.querySelectorAll('#vApp > div[id^="sec"]').forEach(s => s.classList.add('hd'));
+    $('secCot')?.classList.remove('hd');
+    if ($('secCot')) $('secCot').classList.add('cot-grid-pc');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  bx.querySelectorAll('[data-reswa]').forEach(b => b.onclick = () => {
+    const r = reservasOwner[+b.dataset.reswa];
+    if (!r) return;
+    let tel = (r.tel || '').replace(/\D/g, '');
+    if (tel.startsWith('0')) tel = '595' + tel.slice(1);
+    else if (tel.length === 9 && tel.startsWith('9')) tel = '595' + tel;
+    const msg = `Hola *${r.cli}*, ¡tu turno en *${cfg.tallNom || 'nuestro centro'}* quedó confirmado! ✅\n\n📅 *Fecha:* ${r.fec}\n⏰ *Horario:* ${r.hora}\n📍 *Modalidad:* ${r.mod}\n⏱️ *Duración estimada:* ${fmtDuracion(r.durTot || 0)}\n\n¡Te esperamos! 🌿`;
+    window.open('https://' + 'api.whatsapp' + '.com/send?' + (tel ? 'phone=' + tel + '&' : '') + 'text=' + encodeURIComponent(msg), '_blank');
+  });
+
+  bx.querySelectorAll('[data-resdel]').forEach(b => b.onclick = async () => {
+    const r = reservasOwner[+b.dataset.resdel];
+    if (!r || !confirm(`¿Eliminar la solicitud de ${r.cli}?`)) return;
+    await db.collection('users').doc(uid).collection('reservas').doc(r.id).delete();
+    cargarReservasOwner();
+  });
+}
+
 
 if ($('bResetNum')) {
   $('bResetNum').onclick = async () => {
