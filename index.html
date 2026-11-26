@@ -444,27 +444,17 @@ firebase.initializeApp(firebaseConfig);
   auth = firebase.auth(); db = firebase.firestore();
   auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(() => {});
   provider = new firebase.auth.GoogleAuthProvider();
-  auth.getRedirectResult().catch(e => {
-    if (e && e.message && $('err')) $('err').textContent = e.message;
-  });
-
-  $('bLog').onclick = async () => {
-    $('err').textContent = 'Conectando con Google...';
-    const esMovil = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-    try {
-      await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-      if (esMovil) {
-        await auth.signInWithRedirect(provider);
-      } else {
-        await auth.signInWithPopup(provider);
-      }
-    } catch (e) {
-      if (e.code === 'auth/popup-blocked' || e.code === 'auth/cancelled-popup-request' || e.code === 'auth/operation-not-supported-in-this-environment') {
-        auth.signInWithRedirect(provider);
-      } else {
-        $('err').textContent = e.message;
-      }
-    }
+  $('bLog').onclick = () => {
+    $('err').textContent = 'Abriendo ventana de Google...';
+    auth.signInWithPopup(provider)
+      .then(() => { $('err').textContent = ''; })
+      .catch(e => {
+        if (e.code === 'auth/popup-blocked') {
+          auth.signInWithRedirect(provider);
+        } else {
+          $('err').textContent = e.message;
+        }
+      });
   };
   $('bOut').onclick = () => auth.signOut();
 
