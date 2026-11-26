@@ -1,11 +1,11 @@
 {
   "name": "Cotizador Belleza & Bienestar",
-  "short_name": "Cotizador Muebles",
-  "description": "Presupuestos, despiece y planos de corte 2D para carpintería",
+  "short_name": "Cotizador Spa",
+  "description": "Presupuestos profesionales para centros de estética, masajes y bienestar",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fafaf9",
-  "theme_color": "#78350f",
+  "theme_color": "#065f46",
   "orientation": "portrait",
   "icons": [
     {
