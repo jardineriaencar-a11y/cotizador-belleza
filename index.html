@@ -1,0 +1,2188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cotizador de Muebles a Medida</title>
+  <meta name="theme-color" content="#78350f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Cotizador Muebles">
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+
+
+<style>
+  *{box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;margin:0;padding:0}
+  body{background:#f5f0eb;padding:12px;display:flex;justify-content:center;color:#292524}
+  .c{background:#fff;width:100%;max-width:560px;border-radius:16px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.09);position:relative}
+  .hd{display:none!important}
+  .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+  h1{color:#78350f;font-size:1.25rem;flex:1;text-align:center}
+  .sub{text-align:center;color:#78716c;font-size:.82rem;margin-bottom:14px}
+  .mbtn{background:#fef3c7;border:1px solid #fcd34d;color:#78350f;border-radius:10px;padding:7px 11px;font-size:1.2rem;cursor:pointer;font-weight:700}
+  .nav{position:absolute;top:46px;right:18px;background:#fff;border:1px solid #e7e5e4;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,.15);width:235px;z-index:1001;overflow:hidden}
+  .nav button{width:100%;padding:12px 14px;border:none;background:#fff;text-align:left;font-size:.9rem;font-weight:600;color:#44403c;cursor:pointer;border-bottom:1px solid #f5f5f4;display:flex;align-items:center;gap:8px}
+  .nav button:hover{background:#fef3c7;color:#78350f}
+  .fg{margin-bottom:11px}
+  label{display:block;font-size:.81rem;font-weight:600;margin-bottom:4px;color:#44403c}
+  input,select{width:100%;padding:9px;border:1px solid #d6d3d1;border-radius:9px;font-size:.92rem;background:#fafaf9}
+  input:focus,select:focus{outline:none;border-color:#92400e;background:#fff}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:11px}
+  .row3{display:grid;grid-template-columns:1.4fr .7fr .9fr;gap:6px;margin-bottom:6px}
+  .pl{background:#fffbeb;border:1px solid #fde68a;border-radius:11px;padding:10px;margin-bottom:12px}
+  .pbox{background:#fff;border:1px solid #e7e5e4;border-radius:9px;padding:8px;margin-bottom:7px}
+  .lrow{display:flex;gap:5px;align-items:center}
+  .bm{border:none;border-radius:7px;padding:6px 10px;color:#fff;font-weight:600;cursor:pointer;font-size:.8rem}
+  .bdel{background:#dc2626}.badd{background:#92400e;width:100%;margin-top:6px;padding:8px}.bwa{background:#16a34a}.bpdf{background:#2563eb}
+  .res{background:#fef3c7;border-radius:12px;padding:14px;margin-top:10px;border:1px solid #fde68a}
+  .r{display:flex;justify-content:space-between;margin-bottom:6px;font-size:.86rem}
+  .tot{background:#78350f;color:#fff;padding:12px;border-radius:10px;display:flex;justify-content:space-between;font-weight:700;font-size:1.05rem;margin-top:8px}
+  .acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+  .btn{padding:11px;border:none;border-radius:10px;font-weight:700;font-size:.88rem;cursor:pointer;color:#fff}
+  .bwaf{background:#16a34a;grid-column:1/-1;font-size:.94rem}.bsav{background:#d97706}.bclr{background:#57534e}.bhis{background:#292524}.bimp{background:#2563eb}.bcfg{background:#78350f;width:100%}
+  .ub{display:flex;justify-content:space-between;align-items:center;background:#fef3c7;padding:7px 11px;border-radius:10px;margin-bottom:12px;font-size:.8rem;color:#78350f}
+  .ub button{background:#dc2626;color:#fff;border:none;border-radius:6px;padding:4px 8px;cursor:pointer;font-size:.75rem;font-weight:600}
+  .box{margin-top:14px;border-top:2px solid #f5f5f4;padding-top:12px}
+  .hit{background:#fafaf9;border:1px solid #e7e5e4;border-radius:10px;padding:10px;margin-bottom:8px;font-size:.82rem}
+  .hhd{display:flex;justify-content:space-between;font-weight:700;color:#78350f;margin-bottom:3px;gap:6px}
+  .hacts{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
+  .card{background:#fafaf9;border:1px solid #e7e5e4;border-radius:12px;padding:12px;margin-bottom:10px}
+  .card h3{font-size:.92rem;color:#78350f;margin-bottom:8px}
+  @media print{
+    body{background:#fff;padding:0}
+    .c{box-shadow:none;max-width:100%;padding:8px}
+    .np,.ub,.acts,.box,.mbtn,.nav,.pl,.bdel,.badd{display:none!important}
+    .res{border:2px solid #78350f;margin-top:6px;padding:12px;break-inside:avoid;page-break-inside:avoid}
+    .r{margin-bottom:4px;font-size:.85rem}
+    .tot{margin-top:6px;padding:10px}
+    h1{font-size:1.15rem}
+    .sub{margin-bottom:8px}
+    input{border:none;background:transparent;padding:2px 0;font-weight:600;color:#292524}
+  }
+#bMenu{position:absolute!important;top:64px!important;right:14px!important;z-index:1002!important}
+.nav{position:absolute!important;top:106px!important;right:14px!important;width:235px!important;z-index:1001!important;box-shadow:0 10px 25px rgba(0,0,0,.15)!important;border-radius:12px!important}
+
+
+
+    @media (min-width: 900px) {
+      .c {
+        max-width: 1180px !important;
+        padding: 22px 28px !important;
+      }
+      #secCot.cot-grid-pc {
+        display: grid !important;
+        grid-template-columns: 1.55fr 1fr;
+        gap: 20px;
+        align-items: start;
+      }
+      #secCot.cot-grid-pc.hd {
+        display: none !important;
+      }
+      .cot-col-der {
+        position: sticky;
+        top: 16px;
+      }
+      #hLst, #ordLst, #admLicLst {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      #hLst .hit, #ordLst .hit, #admLicLst .hit {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 10px !important;
+        padding: 12px 15px !important;
+        margin-bottom: 0 !important;
+        background: #ffffff !important;
+        border: 1.5px solid #d6d3d1 !important;
+        border-left: 5px solid #b45309 !important;
+        border-radius: 10px !important;
+        box-shadow: 0 2px 6px rgba(120, 53, 15, 0.07) !important;
+        transition: border-color .15s ease, box-shadow .15s ease;
+      }
+      #hLst .hit:hover, #ordLst .hit:hover, #admLicLst .hit:hover {
+        border-color: #d97706 !important;
+        box-shadow: 0 4px 12px rgba(120, 53, 15, 0.14) !important;
+      }
+      #hLst .hit .hhd, #ordLst .hit .hhd, #admLicLst .hit .hhd {
+        margin: 0 !important;
+        flex: 1 1 320px !important;
+      }
+      #hLst .hit .hacts, #ordLst .hit .hacts, #admLicLst .hit .hacts {
+        margin-top: 0 !important;
+        display: flex !important;
+        gap: 6px !important;
+        flex-wrap: wrap !important;
+        justify-content: flex-end !important;
+      }
+    }
+
+
+</style>
+</head>
+<body>
+<div class="c">
+  <div id="vLog" style="text-align:center;padding:28px 10px">
+    <h1 style="margin-bottom:8px">🪚 Cotizador de Muebles</h1>
+    <p style="color:#78716c;font-size:.9rem;margin-bottom:18px">Inicia sesión con tu cuenta de Google para gestionar tus proyectos, materiales y presupuestos.</p>
+    <button type="button" id="bLog" style="background:#78350f;color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:.95rem;font-weight:700;cursor:pointer">🔐 Continuar con Google</button>
+    <p id="err" style="color:#dc2626;font-size:.8rem;margin-top:10px"></p>
+  </div>
+
+    <div id="noAuthView" class="hd" style="text-align:center;padding:24px 12px">
+      <div style="font-size:2.4rem;margin-bottom:8px">🔒</div>
+      <h2 style="color:#78350f;font-size:1.15rem;margin-bottom:6px">Acceso No Habilitado</h2>
+      <p style="font-size:.86rem;color:#57534e;margin-bottom:14px;line-height:1.5">Tu cuenta (<strong id="noAuthMail"></strong>) aún no tiene una licencia activa o se encuentra pausada.</p>
+      <a id="btnSolicitarLic" href="#" target="_blank" class="btn bwaf" style="display:block;text-decoration:none;margin-bottom:10px">💬 Solicitar Activación por WhatsApp</a>
+      <button type="button" class="btn bclr" id="bOutNoAuth" style="width:100%">🚪 Cerrar Sesión / Cambiar Cuenta</button>
+    </div>
+
+  <div id="vApp" class="hd">
+    <div class="ub"><span>👤 <strong id="uNom"></strong></span><button type="button" id="bOut">Salir</button></div>
+    <div class="top">
+      <div style="width:36px"></div>
+      <h1>🪚 Cotizador de Muebles</h1>
+      <button type="button" class="mbtn np" id="bMenu">☰</button>
+    </div>
+    
+    <p class="sub" id="secSub">Presupuesto de Mueble a Medida</p>
+    
+    <div id="pwaBanner" class="np" style="background:linear-gradient(135deg,#78350f,#92400e);color:#fff;padding:12px 14px;border-radius:12px;margin:10px 0 14px 0;box-shadow:0 4px 12px rgba(120,53,15,.2)">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+        <div style="flex:1;min-width:190px">
+          <div style="font-weight:700;font-size:.92rem">📲 Instala el Cotizador en tu teléfono</div>
+          <div id="pwaSubTxt" style="font-size:.76rem;color:#fef3c7;margin-top:2px">Úsalo como aplicación en pantalla completa y sin perder tu acceso.</div>
+         </div>
+         <div style="display:flex;gap:6px;align-items:center">
+          <button type="button" id="bInstalarPWA" onclick="instalarAppAhora()" style="background:#f59e0b;color:#1c1917;border:none;padding:8px 13px;border-radius:8px;font-weight:800;font-size:.82rem;cursor:pointer">⬇️ Instalar App</button>
+          <button type="button" id="bCerrarPWA" onclick="document.getElementById('pwaBanner').style.display='none'" style="background:rgba(255,255,255,.18);color:#fff;border:none;padding:7px 10px;border-radius:8px;font-size:.78rem;cursor:pointer">✕</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav hd np" id="navMenu">
+    <button type="button" data-sec="secCot">📐 Nuevo Presupuesto</button>
+    <button type="button" data-sec="secHis">📋 Historial (<span id="hCnt">0</span>)</button>
+    <button type="button" data-sec="secCom">🛒 Compras e Insumos</button>
+    <button type="button" data-sec="secOrd">📦 Órdenes a Proveedor</button>
+    <button type="button" data-sec="secCat">🪵 Catálogo de Materiales</button>
+    <button type="button" data-sec="secEst">📊 Estado de Resultado</button>
+    <button type="button" data-sec="secCfg">⚙️ Configuración y Precios</button>
+    <button type="button" data-sec="secAdm" id="btnNavAdm" class="hd" style="background:#fef3c7;color:#78350f;font-weight:700">👑 Gestión de Clientes</button>
+
+    </div>
+
+    <!-- 1. COTIZADOR -->
+    <!-- 1. COTIZADOR -->
+    <div id="secCot" class="cot-grid-pc">
+      <div class="cot-col-izq">
+        <div class="box">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <label style="margin:0">Datos del Cliente y Proyecto</label>
+            <span id="badgeNumCot" style="background:#fef3c7;color:#78350f;border:1px solid #f59e0b;padding:3px 10px;border-radius:8px;font-weight:800;font-size:.82rem">Presupuesto N° 0001</span>
+          </div>
+          <div class="row2"><input type="text" id="cNom" placeholder="Nombre del cliente"><input type="tel" id="cTel" placeholder="WhatsApp (Ej: 0981...)"></div>
+          <div class="row2" style="margin-bottom:0"><input type="text" id="cMue" placeholder="Mueble (Ej: Placard 2 puertas)"><input type="text" id="cDir" placeholder="Dirección / Ciudad"></div>
+        </div>
+
+        <div class="pl">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <label style="margin:0;color:#78350f">📐 Módulos y Despiece (cm)</label>
+            <span style="font-size:.78rem;color:#92400e;font-weight:700" id="lblM2Tot">0.00 m²</span>
+          </div>
+          <datalist id="dlMats"></datalist>
+          <div id="modCont" style="max-height:460px;overflow-y:auto;padding-right:4px"></div>
+          <button type="button" class="bm" style="background:#92400e;width:100%;margin-top:6px" id="bAddMod">➕ Agregar otro módulo (Ej: Alacena, Bajo mesada)</button>
+        </div>
+
+        <div class="pl" style="background:#fafaf9;border-color:#d6d3d1">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <label style="margin:0;color:#44403c">🔩 Herrajes, Tapacantos e Insumos</label>
+            <span style="font-size:.78rem;color:#44403c;font-weight:700" id="lblHerTot">Gs. 0</span>
+          </div>
+          <datalist id="dlHers"></datalist>
+          <div id="herCont" style="max-height:240px;overflow-y:auto;padding-right:4px"></div>
+          <button type="button" class="bm badd" style="background:#57534e" id="bAddHer">+ Agregar herraje o insumo (Ej: Bisagra, Corredera)</button>
+        </div>
+
+        <div class="box np" style="margin-bottom:0">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end">
+            <div>
+              <label>Complejidad de trabajo</label>
+              <div style="display:grid;grid-template-columns:92px 1fr;gap:6px">
+                <select id="compTipo" style="padding:8px 6px">
+                  <option value="gs">Gs.</option>
+                  <option value="pct">%</option>
+                </select>
+                <input type="number" id="compVal" value="0" min="0" step="any" placeholder="0">
+              </div>
+            </div>
+            <div><label>Flete / Entrega (Gs.)</label><input type="number" id="fle" value="" step="5000"></div>
+          </div>
+          <input type="hidden" id="mar" value="30">
+        </div>
+      </div>
+
+      <div class="cot-col-der">
+        <div class="res">
+          <div class="r"><span>Tableros + desperdicio (<span id="rDespPct">10</span>%):</span><strong id="rMat">Gs. 0</strong></div>
+          <div id="rDetPzas" style="font-size:.78rem;color:#57534e;padding-left:8px;margin-bottom:6px"></div>
+          <div class="r"><span>Herrajes e insumos:</span><strong id="rHer">Gs. 0</strong></div>
+          <div id="rDetHers" style="display:none"></div>
+          <div class="r"><span>Mano de obra (<span id="rMarPct">30</span>%):</span><strong id="rGan">Gs. 0</strong></div>
+          <div class="r" style="border-top:1px solid #fde68a;padding-top:5px;margin-top:4px"><span>Costo Base Total:</span><strong id="rBase">Gs. 0</strong></div>
+          <div class="r"><span id="lblComp">Complejidad de trabajo:</span><strong id="rMo">Gs. 0</strong></div>
+          <div class="r"><span>Flete / Entrega:</span><strong id="rFle">Gs. 0</strong></div>
+          <div class="tot"><span>TOTAL PRESUPUESTO:</span><span id="rPre">Gs. 0</span></div>
+        </div>
+
+        <div class="np">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;width:100%">
+            <button type="button" class="btn bsav" id="bSav" style="margin:0;padding:11px 6px;font-size:.88rem">💾 Guardar</button>
+            <button type="button" class="btn bclr" id="bClr" style="margin:0;padding:11px 6px;font-size:.88rem">🧹 Limpiar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- 1B. HISTORIAL DE PRESUPUESTOS -->
+  <div id="secHis" class="hd">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+        <h3 style="margin:0">📋 Historial de Presupuestos Guardados</h3>
+        <input type="text" id="busqHis" placeholder="🔍 Filtrar por cliente o mueble..." style="max-width:260px;padding:7px 10px;font-size:.82rem;margin:0">
+      </div>
+      <div id="hLst"></div>
+    </div>
+  </div>
+
+    <!-- 2. COMPRAS -->
+    <div id="secCom" class="hd">
+      <div class="fg"><label>Concepto de Compra / Material</label><input type="text" id="comCat" placeholder="Ej: Plancha Melamina Blanca 18mm, Caja Bisagras..."></div>
+      <div class="fg"><label>Fecha</label><input type="date" id="comFec"></div>
+      <div class="row2">
+        <div><label>Cantidad</label><input type="number" id="comCan" value="1" step="any"></div>
+        <div><label>Precio Unitario (Gs.)</label><input type="number" id="comPru" placeholder="Ej: 280000" step="any"></div>
+      </div>
+      <div class="res" style="margin-bottom:12px"><div class="r" style="margin:0"><span>TOTAL GASTO:</span><strong id="comTot">Gs. 0</strong></div></div>
+      <button type="button" class="btn bsav" style="width:100%" id="bAddCom">➕ Registrar Compra</button>
+      <div class="box"><label style="margin-bottom:8px">Historial de Compras (<span id="cCnt">0</span>):</label><div id="cLst"></div></div>
+    </div>
+
+        <div id="secOrd" class="hd">
+      <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+        <h3 style="margin:0">📦 Órdenes de Pedido a Proveedor</h3>
+        <input type="text" id="busqOrd" placeholder="🔍 Filtrar por cliente, mueble o N°..." style="max-width:260px;padding:7px 10px;font-size:.82rem;margin:0">
+      </div>
+     <div id="ordLst"></div>
+      </div>
+    </div>
+
+            <div id="secCat" class="hd">
+      <div class="card">
+        <h3>🪵 Tableros / Maderas (Medidas y Precio por Plancha)</h3>
+        <p style="font-size:.76rem;color:#78716c;margin-bottom:8px">Define la medida estándar de cada plancha en cm (Ej: 275×183 o 244×122) y su precio por plancha entera.</p>
+        <input type="text" id="busqMat" placeholder="🔍 Filtrar tableros..." style="margin-bottom:8px;padding:7px;font-size:.82rem">
+        <div id="cfgMatLst" style="max-height:320px;overflow-y:auto;padding-right:2px"></div>
+        <div style="background:#fff;border:1.5px solid #d6d3d1;border-radius:10px;padding:8px;margin-top:8px">
+          <div class="lrow" style="margin-bottom:6px">
+            <input type="text" id="newMatNom" placeholder="Nuevo tablero (Ej: Terciado 15mm)" style="padding:6px 8px;font-size:.82rem">
+            <input type="number" id="newMatPre" placeholder="Gs./plancha" style="max-width:110px;padding:6px 8px;font-size:.82rem">
+           </div>
+           <div style="display:flex;align-items:center;gap:6px;font-size:.76rem;color:#78350f;flex-wrap:wrap">
+            <span style="font-weight:600">Ancho (cm):</span>
+            <input type="number" id="newMatAnc" value="275" placeholder="cm" style="padding:5px 6px;font-size:.8rem;width:64px">
+            <span style="font-weight:600;margin-left:2px">Largo (cm):</span>
+            <input type="number" id="newMatAlt" value="183" placeholder="cm" style="padding:5px 6px;font-size:.8rem;width:64px">
+            <button type="button" class="bm" style="background:#78350f;padding:7px 12px;margin-left:auto" id="bAddMat">➕ Agregar</button>
+          </div>
+        </div>
+    </div>
+    
+
+      <div class="card">
+        <h3>🔩 Herrajes, Tapacantos e Insumos</h3>
+        <input type="text" id="busqHer" placeholder="🔍 Filtrar herrajes o insumos..." style="margin-bottom:8px;padding:7px;font-size:.82rem">
+        <div id="cfgHerLst" style="max-height:320px;overflow-y:auto;padding-right:2px"></div>
+        <div class="lrow" style="margin-top:8px">
+          <input type="text" id="newHerNom" placeholder="Nuevo herraje (Ej: Bisagra cazoleta)" style="padding:7px;font-size:.82rem">
+          <input type="number" id="newHerPre" placeholder="Gs./unid" style="max-width:110px;padding:7px;font-size:.82rem">
+          <button type="button" class="bm" style="background:#78350f;padding:8px 12px" id="bAddHerCfg">➕</button>
+        </div>
+      </div>
+
+      <button type="button" class="btn bcfg" id="bSavCat">💾 Guardar Catálogo de Materiales</button>
+    </div>
+    <div id="secEst" class="hd">
+      <div class="card">
+        <h3>📈 Resumen Financiero Real (Taller)</h3>
+        <div class="r"><span>Trabajos cobrados (Pagados):</span><strong id="erCnt">0</strong></div>
+        <div class="r"><span>Ingresos Totales (Pagados):</span><strong style="color:#16a34a" id="erIng">Gs. 0</strong></div>
+        <div class="r"><span>Gastos en Materiales e Insumos:</span><strong style="color:#dc2626" id="erGas">Gs. 0</strong></div>
+        <div class="tot" style="margin-top:10px"><span>UTILIDAD NETA:</span><span id="erNet">Gs. 0</span></div>
+      </div>
+    </div>
+
+
+
+            <div id="secAdm" class="hd">
+      <div class="card" style="border-color:#d97706;background:#fffbeb">
+        <h3>👑 Administración de Clientes y Licencias</h3>
+        <p style="font-size:.76rem;color:#78716c;margin-bottom:10px">Agrega el correo Gmail de cada carpintería cliente para habilitar su acceso o pausa su cuenta cuando corresponda.</p>
+        <div class="row2" style="margin-bottom:8px">
+          <div><label>Nombre del Taller / Cliente</label><input type="text" id="admCliNom" placeholder="Ej: Carpintería San José"></div>
+          <div><label>WhatsApp (Opcional)</label><input type="tel" id="admCliTel" placeholder="Ej: 0981 123 456"></div>
+        </div>
+        <div class="row2" style="margin-bottom:8px">
+          <div>
+            <label>Modalidad de Licencia</label>
+            <select id="admCliPlan">
+              <option value="unico">♾️ Pago Único (Indefinido)</option>
+              <option value="suscripcion">📅 Suscripción Mensual (30 días)</option>
+            </select>
+          </div>
+          <div>
+            <label>Correo Gmail del Cliente</label>
+            <input type="email" id="admCliMail" placeholder="correo.cliente@gmail.com">
+          </div>
+        </div>
+        <button type="button" class="btn" style="background:#16a34a;color:#fff;margin-bottom:10px" id="bAddLic">➕ Autorizar Cliente</button>
+        <div id="admLicLst"></div>
+      </div>
+    </div>
+
+    <div id="secCfg" class="hd">
+        <div class="card">
+        <h3>🏢 Datos de tu Taller / Carpintería</h3>
+        <p style="font-size:.76rem;color:#78716c;margin-bottom:8px">Este nombre aparecerá en el encabezado de tus presupuestos PDF y órdenes de pedido.</p>
+        <div class="fg"><label>Nombre Comercial del Taller</label><input type="text" id="cfgTallNom" placeholder="Ej: Carpintería San José"></div>
+        <div class="fg" style="margin-bottom:0"><label>Teléfono / WhatsApp del Taller (opcional)</label><input type="text" id="cfgTallTel" placeholder="Ej: 0981 123 456"></div>
+              <div style="margin-top:8px">
+        <label>Logo del Taller (Opcional — aparece en los PDF)</label>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <input type="file" id="cfgLogoFile" accept="image/*" style="padding:6px;font-size:.8rem;max-width:250px">
+          <button type="button" class="bm" id="bQuitarLogo" style="background:#dc2626;display:none">🗑️ Quitar logo</button>
+        </div>
+        <div style="font-size:.75rem;color:#78716c;margin-top:4px">💡 Recomendado: PNG transparente o JPG horizontal/cuadrado (aprox. 260×110 px).</div>
+        <div id="prevLogoWrap" style="margin-top:8px;display:none">
+          <img id="prevLogoImg" src="" alt="Logo del taller" style="max-height:64px;max-width:200px;border:1px solid #d6d3d1;border-radius:6px;padding:4px;background:#fff">
+        </div>
+      </div>
+
+      </div>
+
+
+      <div class="card">
+        <h3>⚙️ Tarifas Fijas y Desperdicio</h3>
+        <div class="fg"><label>Flete / Entrega base (Gs.)</label><input type="number" id="cfgFle" value="50000" step="5000"></div>
+        <div class="row2" style="margin-bottom:0">
+          <div><label>Desperdicio de corte (%)</label><input type="number" id="cfgDesp" value="10" step="1"></div>
+          <div><label>Porcentaje por mano de obra (%)</label><input type="number" id="cfgMar" value="30" step="5"></div>
+        </div>
+      </div>
+      <button type="button" class="bm" id="bResetNum" style="background:#57534e;margin-bottom:8px">🔄 Reiniciar contador de presupuestos a 0001</button>
+      <button type="button" class="btn bcfg" id="bSavCfg">💾 Guardar Toda la Configuración</button>
+            <div class="box" style="margin-top:12px;border-color:#d6d3d1">
+        <label style="color:#78350f;margin-bottom:6px">☁️ Respaldo y Exportación de Datos</label>
+        <div style="font-size:.78rem;color:#57534e;margin-bottom:10px">
+          Tus datos se sincronizan automáticamente en la nube con tu cuenta de Google. Además, puedes descargar una planilla para Excel o una copia completa de seguridad:
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+          <button type="button" class="btn" style="background:#15803d;color:#fff;margin:0;padding:10px 8px;font-size:.82rem" onclick="exportarExcelCSV()">📊 Exportar a Excel (.csv)</button>
+          <button type="button" class="btn" style="background:#0369a1;color:#fff;margin:0;padding:10px 8px;font-size:.82rem" onclick="descargarBackupJSON()">💾 Copia Seguridad (.json)</button>
+        </div>
+        <label style="display:block;text-align:center;background:#f5f5f4;border:1px dashed #a8a29e;color:#44403c;padding:8px;border-radius:8px;font-size:.8rem;cursor:pointer;margin:0">
+          📤 Restaurar desde archivo (.json)
+          <input type="file" id="inpRestaurarJSON" accept=".json" style="display:none" onchange="restaurarBackupJSON(this)">
+        </label>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+Promise.all(['app', 'auth', 'firestore'].map(m => new Promise(r => {
+  const s = document.createElement('script');
+  s.src = 'https://' + 'www.gstatic' + '.com/firebasejs/10.12.2/firebase-' + m + '-compat.js';
+  s.onload = r; document.head.appendChild(s);
+}))).then(() => {
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAsM64ACpM12eXdpIs7AmgK4QQxzW138RA",
+  authDomain: "cotizadormuebles" + ".firebaseapp.com",
+  projectId: "cotizadormuebles",
+  storageBucket: "cotizadormuebles" + ".firebasestorage.app",
+  messagingSenderId: "1058399168111",
+  appId: "1:1058399168111:web:9d65009dfa86e4fd464f9a"
+};
+
+const $ = id => document.getElementById(id);
+const gs = n => 'Gs. ' + Math.round(n || 0).toLocaleString('es-PY');
+let auth, db, provider, uid = null;
+let mods = [{ nom: '', ph: 'Ej: Bajo mesada / Cuerpo principal', pzas: [] }];
+let hers = [];
+let cots = [], coms = [];
+let cfg = {
+  tallNom: 'Cotizador de Muebles', tallTel: '',
+  pxh: 35000, fle: 50000, desp: 10, mar: 30,
+  mats: [
+    { nom: 'Melamina Blanca 18mm', anc: 275, alt: 183, pre: 280000 },
+    { nom: 'Melamina Color / Madera 18mm', anc: 275, alt: 183, pre: 360000 },
+    { nom: 'MDF Crudo 18mm', anc: 275, alt: 183, pre: 225000 },
+    { nom: 'Fondo MDF 3mm / 5mm', anc: 275, alt: 183, pre: 110000 },
+    { nom: 'Terciado Fenólico 18mm', anc: 244, alt: 122, pre: 240000 }
+  ],
+  hers: [
+    { nom: 'Bisagra Cazoleta (unid)', pre: 4500 },
+    { nom: 'Corredera Telescópica (par)', pre: 22000 },
+    { nom: 'Tapacanto PVC (metro)', pre: 2500 },
+    { nom: 'Tirador / Manija (unid)', pre: 8000 },
+    { nom: 'Tornillos, Cola y Lijas (kit)', pre: 15000 }
+  ]
+};
+
+firebase.initializeApp(firebaseConfig);
+  auth = firebase.auth(); db = firebase.firestore();
+  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(() => {});
+  provider = new firebase.auth.GoogleAuthProvider();
+  $('bLog').onclick = async () => {
+    try {
+      await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+      await auth.signInWithPopup(provider);
+    } catch (e) {
+      if (e.code === 'auth/popup-blocked' || e.code === 'auth/cancelled-popup-request') {
+        auth.signInWithRedirect(provider);
+      } else {
+        $('err').textContent = e.message;
+      }
+    }
+  };
+  $('bOut').onclick = () => auth.signOut();
+
+const ADMIN_EMAIL = 'jardineria.encar@gmail.com';
+const MI_WHATSAPP_VENTAS = '595972710742';
+
+auth.onAuthStateChanged(async user => {
+  if (!user) {
+    uid = null;
+    $('vLog').classList.remove('hd');
+    $('vApp').classList.add('hd');
+    $('noAuthView').classList.add('hd');
+    return;
+  }
+
+  const email = (user.email || '').toLowerCase().trim();
+  const esAdmin = email === ADMIN_EMAIL;
+  let autorizado = esAdmin;
+  let motivoVencido = false;
+
+  if (!esAdmin) {
+    try {
+      const licDoc = await db.collection('licencias').doc(email).get();
+      if (licDoc.exists) {
+        const dLic = licDoc.data();
+        const esSusc = dLic.plan === 'suscripcion';
+        const vencida = esSusc && dLic.fechaCorte && Date.now() > dLic.fechaCorte;
+
+        if (vencida) {
+          motivoVencido = true;
+          if (dLic.activo !== false) {
+            await db.collection('licencias').doc(email).update({ activo: false }).catch(() => {});
+          }
+        } else if (dLic.activo === true) {
+          autorizado = true;
+        }
+      }
+    } catch (e) {
+      console.error('Error verificando licencia:', e);
+    }
+  }
+
+  if (!autorizado) {
+    uid = null;
+    $('vLog').classList.add('hd');
+    $('vApp').classList.add('hd');
+    $('noAuthView').classList.remove('hd');
+    $('noAuthMail').textContent = motivoVencido ? `${email} (Suscripción vencida)` : email;
+    const msg = motivoVencido
+      ? `Hola, mi suscripción mensual del Cotizador de Muebles venció y deseo renovarla para el correo: ${email}`
+      : `Hola, quiero activar mi licencia del Cotizador de Muebles para el correo: ${email}`;
+    $('btnSolicitarLic').href = 'https://' + 'api.whatsapp' + '.com/send?phone=' + MI_WHATSAPP_VENTAS + '&text=' + encodeURIComponent(msg);
+    return;
+  }
+
+  uid = user.uid;
+  $('vLog')?.classList.add('hd');
+  $('noAuthView')?.classList.add('hd');
+  $('vApp')?.classList.remove('hd');
+  if ($('uNom')) $('uNom').textContent = user.displayName || email;
+
+  if (esAdmin) {
+    $('btnNavAdm')?.classList.remove('hd');
+    iniciarAdminLicencias();
+  } else {
+    $('btnNavAdm')?.classList.add('hd');
+  }
+
+  iniciarDatos();
+  if (user && user.email && user.email.toLowerCase().trim() !== 'jardineria.encar@gmail.com') {
+  const emailKey = user.email.toLowerCase().trim();
+  const licRef = db.collection('licencias').doc(emailKey);
+  const marcarPresencia = (activo) => {
+    licRef.set({
+      online: activo,
+      ultimaActividad: Date.now()
+    }, { merge: true }).catch(() => {});
+  };
+  marcarPresencia(true);
+  if (window._heartbeatLic) clearInterval(window._heartbeatLic);
+  window._heartbeatLic = setInterval(() => {
+    if (document.visibilityState === 'visible') marcarPresencia(true);
+  }, 45000);
+  document.addEventListener('visibilitychange', () => {
+    marcarPresencia(document.visibilityState === 'visible');
+  });
+  window.addEventListener('beforeunload', () => marcarPresencia(false));
+}
+
+});
+
+
+if ($('bOutNoAuth')) $('bOutNoAuth').onclick = () => auth.signOut();
+
+function iniciarDatos() {
+  db.collection('users').doc(uid).collection('settings').doc('general').onSnapshot(doc => {
+    if (doc.exists) cfg = Object.assign(cfg, doc.data());
+    else db.collection('users').doc(uid).collection('settings').doc('general').set(cfg);
+    aplicarCfgUI();
+  });
+  db.collection('users').doc(uid).collection('cotizaciones').orderBy('ts', 'desc').onSnapshot(snap => {
+    cots = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    cots.sort((a, b) => (Number(b.num) || 0) - (Number(a.num) || 0) || (b.ts || 0) - (a.ts || 0));
+    renderHist(); renderOrdenes(); updEst(); cargarContadores();
+  });
+  db.collection('users').doc(uid).collection('compras').orderBy('ts', 'desc').onSnapshot(snap => {
+    coms = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderComs(); updEst();
+  });
+}
+
+window.exportarExcelCSV = function() {
+  if (!cots || !cots.length) {
+    alert('Aún no tienes presupuestos guardados para exportar.');
+    return;
+  }
+  const sep = ';'; // Punto y coma para que Excel en español separe columnas automáticamente
+  const encabezados = ['Fecha', 'Cliente', 'Telefono', 'Mueble / Proyecto', 'Horas Taller', 'Flete (Gs)', 'Total Presupuesto (Gs)', 'Estado'];
+  const filas = cots.map(it => {
+    const limpiar = (v) => `"${String(v || '').replace(/"/g, '""')}"`;
+    const totNum = String(it.tot || '0').replace(/\D/g, '') || '0';
+    return [
+      limpiar(it.fec),
+      limpiar(it.cli),
+      limpiar(it.tel),
+      limpiar(it.mue),
+      it.hrs || 0,
+      it.fle || 0,
+      totNum,
+      limpiar(it.pagado ? 'PAGADO' : 'PENDIENTE')
+    ].join(sep);
+  });
+
+  const csvContent = '\uFEFF' + [encabezados.join(sep), ...filas].join('\n');
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const fechaHoy = new Date().toLocaleDateString('es-PY').replace(/\//g, '-');
+  a.href = url;
+  a.download = `Presupuestos_Taller_${fechaHoy}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+window.descargarBackupJSON = function() {
+  const backup = {
+    version: 1,
+    fechaRespaldo: new Date().toISOString(),
+    taller: cfg.tallNom || 'Taller',
+    cfg: cfg,
+    cots: cots || [],
+    movs: typeof movs !== 'undefined' ? movs : []
+  };
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const fechaHoy = new Date().toLocaleDateString('es-PY').replace(/\//g, '-');
+  a.href = url;
+  a.download = `Respaldo_Cotizador_${fechaHoy}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+window.restaurarBackupJSON = async function(input) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+  if (!uid) { alert('Inicia sesión primero para restaurar datos.'); return; }
+
+  try {
+    const texto = await file.text();
+    const data = JSON.parse(texto);
+    if (!data || (!data.cfg && !data.cots)) {
+      alert('El archivo seleccionado no es una copia de seguridad válida.');
+      return;
+    }
+    if (!confirm(`¿Restaurar copia de seguridad de "${data.taller || 'Taller'}" (${(data.cots || []).length} presupuestos)? Esto actualizará tus datos en la nube.`)) {
+      return;
+    }
+
+    if (data.cfg) {
+      cfg = Object.assign({}, cfg, data.cfg);
+      await db.collection('usuarios').doc(uid).set({ cfg }, { merge: true });
+      if (typeof aplicarCfgUI === 'function') aplicarCfgUI();
+    }
+    if (Array.isArray(data.cots)) {
+      for (const c of data.cots) {
+        if (c.id) {
+          await db.collection('usuarios').doc(uid).collection('presupuestos').doc(c.id).set(c, { merge: true });
+        } else {
+          await db.collection('usuarios').doc(uid).collection('presupuestos').add(c);
+        }
+      }
+    }
+    alert('✅ Copia de seguridad restaurada correctamente en la nube.');
+  } catch (e) {
+    alert('Error al leer el archivo de respaldo: ' + e.message);
+  } finally {
+    input.value = '';
+  }
+};
+
+let proxNumCot = 1;
+let proxNumOrd = 1;
+const fmtCorrelativo = (n) => String(n || 1).padStart(4, '0');
+
+async function cargarContadores() {
+  if (!uid) return;
+  try {
+    const doc = await db.collection('users').doc(uid).collection('settings').doc('contadores').get();
+    const d = doc.exists ? doc.data() : {};
+    const maxCotHist = (cots || []).reduce((m, x) => Math.max(m, parseInt(x.num, 10) || 0), 0);
+    const maxOrdHist = (typeof ords !== 'undefined' ? ords : []).reduce((m, x) => Math.max(m, parseInt(x.num, 10) || 0), 0);
+    proxNumCot = Math.max((parseInt(d.cotNum, 10) || 0) + 1, maxCotHist + 1);
+    proxNumOrd = Math.max((parseInt(d.ordNum, 10) || 0) + 1, maxOrdHist + 1);
+    if ($('badgeNumCot') && !$('badgeNumCot').dataset.cargado) {
+      $('badgeNumCot').textContent = 'Presupuesto N° ' + fmtCorrelativo(proxNumCot);
+    }
+  } catch (e) { console.error('Error contadores:', e); }
+}
+
+async function reservarSiguienteNumero(tipo) {
+  const ref = db.collection('users').doc(uid).collection('settings').doc('contadores');
+  const campo = tipo === 'ord' ? 'ordNum' : 'cotNum';
+  const pisoActual = tipo === 'ord' ? (proxNumOrd - 1) : (proxNumCot - 1);
+  return await db.runTransaction(async (tx) => {
+    const snap = await tx.get(ref);
+    const actual = snap.exists ? (parseInt(snap.data()[campo], 10) || 0) : 0;
+    const siguiente = Math.max(actual, pisoActual) + 1;
+    tx.set(ref, { [campo]: siguiente }, { merge: true });
+    return siguiente;
+  });
+}
+
+
+function aplicarCfgUI() {
+  $('cfgTallNom').value = cfg.tallNom || 'Cotizador de Muebles';
+  $('cfgTallTel').value = cfg.tallTel || '';
+  if ($('prevLogoImg') && $('prevLogoWrap') && $('bQuitarLogo')) {
+  if (cfg.tallLogo) {
+    $('prevLogoImg').src = cfg.tallLogo;
+    $('prevLogoWrap').style.display = 'block';
+    $('bQuitarLogo').style.display = 'inline-block';
+  } else {
+    $('prevLogoImg').src = '';
+    $('prevLogoWrap').style.display = 'none';
+    $('bQuitarLogo').style.display = 'none';
+  }
+ }
+
+  const h1App = $('appView') ? $('appView').querySelector('h1') : null;
+  if (h1App) h1App.textContent = '🪚 ' + (cfg.tallNom || 'Cotizador de Muebles');
+  $('cfgFle').value = cfg.fle;
+  $('cfgDesp').value = cfg.desp; $('cfgMar').value = cfg.mar;
+  $('fle').value = cfg.fle; $('mar').value = cfg.mar;  
+  renderCfgLists();
+  calc();
+  if ($('prevLogoImg') && $('prevLogoWrap') && $('bQuitarLogo')) {
+  if (cfg.tallLogo) {
+    $('prevLogoImg').src = cfg.tallLogo;
+    $('prevLogoWrap').style.display = 'block';
+    $('bQuitarLogo').style.display = 'inline-block';
+  } else {
+    $('prevLogoImg').src = '';
+    $('prevLogoWrap').style.display = 'none';
+    $('bQuitarLogo').style.display = 'none';
+  }
+  if (typeof renderMods === 'function') renderMods();
+  if (typeof renderHers === 'function') renderHers();
+
+}
+
+}
+if ($('cfgLogoFile')) {
+  $('cfgLogoFile').onchange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      if (file.type === 'image/svg+xml' && ev.target.result.length < 150000) {
+        cfg.tallLogo = ev.target.result;
+        aplicarCfgUI();
+        return;
+      }
+      const img = new Image();
+      img.onload = () => {
+        const maxW = 480, maxH = 240;
+        let w = img.width, h = img.height;
+        if (w > maxW) { h = Math.round(h * (maxW / w)); w = maxW; }
+        if (h > maxH) { w = Math.round(w * (maxH / h)); h = maxH; }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, 0, 0, w, h);
+        cfg.tallLogo = canvas.toDataURL('image/png', 0.92);
+        aplicarCfgUI();
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+}
+if ($('bQuitarLogo')) {
+  $('bQuitarLogo').onclick = () => {
+    cfg.tallLogo = '';
+    if ($('cfgLogoFile')) $('cfgLogoFile').value = '';
+    aplicarCfgUI();
+  };
+}
+
+
+
+function obtenerTodasLasPzas(listaMods) {
+  const todas = [];
+  (listaMods || mods || []).forEach(m => {
+    (m.pzas || []).forEach(p => {
+      todas.push({ ...p, modNom: m.nom || '' });
+    });
+  });
+  return todas;
+}
+
+function actualizarM2EnVivo() {
+  let tot = 0;
+  mods.forEach((mod, mi) => {
+    let m2Mod = 0;
+    (mod.pzas || []).forEach((p, pi) => {
+      const m2 = ((parseFloat(p.cant) || 0) * (parseFloat(p.ancho) || 0) * (parseFloat(p.alto) || 0)) / 10000;
+      m2Mod += m2;
+      const lblP = document.getElementById(`m2p_${mi}_${pi}`);
+      if (lblP) lblP.textContent = m2.toFixed(2) + ' m²';
+    });
+    tot += m2Mod;
+    const lblM = document.getElementById(`m2m_${mi}`);
+    if (lblM) lblM.textContent = m2Mod.toFixed(2) + ' m²';
+  });
+  if ($('lblM2Tot')) $('lblM2Tot').textContent = tot.toFixed(2) + ' m²';
+}
+
+function renderMods() {
+  const dl = $('dlMats');
+  if (dl) dl.innerHTML = cfg.mats.map(m => `<option value="${m.nom.replace(/"/g, '&quot;')}">${m.anc || 275}×${m.alt || 183}cm - ${gs(m.pre)}/plancha</option>`).join('');
+
+  const c = $('modCont');
+  if (!c) return;
+  c.innerHTML = '';
+
+  mods.forEach((mod, mi) => {
+    if (!mod.pzas) mod.pzas = [];
+    if (!mod.pzas.length) mod.pzas.push({ nom: '', matNom: '', matIdx: '', cant: 1, ancho: '', alto: '' });
+    if (mod.abierto === undefined) mod.abierto = true;
+
+    let m2Mod = 0;
+    mod.pzas.forEach(p => {
+      m2Mod += ((parseFloat(p.cant) || 0) * (parseFloat(p.ancho) || 0) * (parseFloat(p.alto) || 0)) / 10000;
+    });
+
+    const box = document.createElement('div');
+    box.style.cssText = 'border:1.5px solid #d97706;background:#fffbeb;border-radius:10px;padding:9px;margin-bottom:10px';
+
+    let pzasHtml = '';
+    mod.pzas.forEach((p, pi) => {
+      const matNombre = p.matNom !== undefined ? p.matNom : (p.matIdx !== undefined && p.matIdx !== '' && cfg.mats[p.matIdx] ? cfg.mats[p.matIdx].nom : '');
+      const m2 = ((parseFloat(p.cant) || 0) * (parseFloat(p.ancho) || 0) * (parseFloat(p.alto) || 0)) / 10000;
+      pzasHtml += `<div class="pbox" style="background:#fff;margin-bottom:6px">
+        <div class="lrow" style="margin-bottom:6px">
+          <input type="text" value="${(p.nom || '').replace(/"/g, '&quot;')}" placeholder="Pieza (Ej: Lateral, Puerta, Estante)" data-mi="${mi}" data-pi="${pi}" data-pk="nom" style="padding:6px;font-size:.83rem;font-weight:600">
+          <span id="m2p_${mi}_${pi}" style="font-size:.76rem;font-weight:700;color:#78350f;white-space:nowrap">${m2.toFixed(2)} m²</span>
+          <button type="button" class="bm bdel" data-delp="${mi}:${pi}">✕</button>
+        </div>
+        <div class="row3">
+          <div><label style="font-size:.72rem">🔍 Material</label><input type="text" list="dlMats" value="${(matNombre || '').replace(/"/g, '&quot;')}" placeholder="Buscar material..." data-mi="${mi}" data-pi="${pi}" data-pk="matSearch" style="padding:6px;font-size:.8rem"></div>
+          <div><label style="font-size:.72rem">Cant.</label><input type="number" value="${p.cant}" placeholder="Cant" min="1" data-mi="${mi}" data-pi="${pi}" data-pk="cant" style="padding:6px;font-size:.82rem"></div>
+          <div><label style="font-size:.72rem">Ancho × Alto (cm)</label><div style="display:flex;gap:3px"><input type="number" value="${p.ancho}" placeholder="Anc" data-mi="${mi}" data-pi="${pi}" data-pk="ancho" style="padding:6px;font-size:.8rem"><input type="number" value="${p.alto}" placeholder="Alt" data-mi="${mi}" data-pi="${pi}" data-pk="alto" style="padding:6px;font-size:.8rem"></div></div>
+        </div>
+      </div>`;
+    });
+
+    const phTexto = mod.ph || (mi === 0 ? 'Ej: Bajo mesada / Cuerpo principal' : 'Ej: Alacena Superior / Módulo ' + (mi + 1));
+    const flecha = mod.abierto ? '▾' : '▸';
+    const resumenCerrado = mod.abierto ? '' : `<span style="font-size:.74rem;color:#78716c;white-space:nowrap">(${mod.pzas.length} pza${mod.pzas.length === 1 ? '' : 's'})</span>`;
+
+    box.innerHTML = `
+      <div class="lrow" style="margin-bottom:${mod.abierto ? '7px' : '0'};align-items:center;gap:6px">
+        <button type="button" class="bm" data-togmod="${mi}" title="${mod.abierto ? 'Contraer módulo' : 'Expandir módulo'}" style="background:#f59e0b;color:#78350f;font-weight:900;padding:5px 9px;min-width:30px">${flecha}</button>
+        <input type="text" value="${(mod.nom || '').replace(/"/g, '&quot;')}" placeholder="${phTexto}" data-modnom="${mi}" style="padding:6px 8px;font-size:.85rem;font-weight:700;background:#fff;border:1px solid #d97706;color:#78350f">
+        ${resumenCerrado}
+        <span id="m2m_${mi}" style="font-size:.78rem;font-weight:700;color:#92400e;white-space:nowrap">${m2Mod.toFixed(2)} m²</span>
+        ${mods.length > 1 ? `<button type="button" class="bm bdel" data-delmod="${mi}" title="Eliminar módulo">🗑️</button>` : ''}
+      </div>
+      <div class="${mod.abierto ? '' : 'hd'}">
+        <div>${pzasHtml}</div>
+        <button type="button" class="bm" style="background:#78350f;width:100%;padding:7px;font-size:.8rem;margin-top:2px" data-addp="${mi}">+ Agregar pieza a este módulo</button>
+      </div>
+    `;
+    c.appendChild(box);
+  });
+
+  c.querySelectorAll('[data-togmod]').forEach(b => {
+    b.onclick = () => {
+      const idx = +b.dataset.togmod;
+      mods[idx].abierto = !mods[idx].abierto;
+      renderMods();
+    };
+  });
+  c.querySelectorAll('[data-modnom]').forEach(el => {
+    el.oninput = e => {
+      mods[+e.target.dataset.modnom].nom = e.target.value;
+      calc();
+    };
+  });
+  c.querySelectorAll('[data-pi]').forEach(el => {
+    el.oninput = e => {
+      const mi = +e.target.dataset.mi, pi = +e.target.dataset.pi, k = e.target.dataset.pk;
+      if (k === 'matSearch') {
+        const val = e.target.value;
+        mods[mi].pzas[pi].matNom = val;
+        const foundIdx = cfg.mats.findIndex(m => m.nom.toLowerCase() === val.trim().toLowerCase());
+        mods[mi].pzas[pi].matIdx = foundIdx >= 0 ? foundIdx : '';
+      } else {
+        mods[mi].pzas[pi][k] = e.target.value;
+        actualizarM2EnVivo();
+      }
+      calc();
+    };
+  });
+  c.querySelectorAll('[data-addp]').forEach(b => b.onclick = () => {
+    const idx = +b.dataset.addp;
+    mods[idx].abierto = true;
+    mods[idx].pzas.push({ nom: '', matNom: '', matIdx: '', cant: 1, ancho: '', alto: '' });
+    renderMods();
+  });
+  c.querySelectorAll('[data-delp]').forEach(b => b.onclick = () => {
+    const [mi, pi] = b.dataset.delp.split(':').map(Number);
+    mods[mi].pzas.splice(pi, 1);
+    renderMods(); calc();
+  });
+  c.querySelectorAll('[data-delmod]').forEach(b => b.onclick = () => {
+    mods.splice(+b.dataset.delmod, 1);
+    renderMods(); calc();
+  });
+}
+
+if ($('bAddMod')) {
+$('bAddMod').onclick = () => {
+  mods.push({ nom: '', abierto: true, pzas: [{ nom: '', matIdx: '', matNom: '', cant: 1, ancho: '', alto: '' }] });
+  renderMods();
+  calc();
+};
+}
+
+function renderHers() {
+  const dl = $('dlHers');
+  if (dl) dl.innerHTML = cfg.hers.map(h => `<option value="${h.nom.replace(/"/g, '&quot;')}">${gs(h.pre)}</option>`).join('');
+  const c = $('herCont'); c.innerHTML = '';
+  hers.forEach((h, i) => {
+    const d = document.createElement('div'); d.className = 'pbox';
+    d.innerHTML = `<div class="row3" style="margin-bottom:0;grid-template-columns:1.6fr .6fr .9fr auto">
+      <input type="text" list="dlHers" value="${(h.nom || '').replace(/"/g, '&quot;')}" placeholder="🔍 Buscar o escribir herraje..." data-hi="${i}" data-hk="nom" style="padding:6px;font-size:.82rem">
+      <input type="number" value="${h.cant}" placeholder="Cant" step="any" data-hi="${i}" data-hk="cant" style="padding:6px;font-size:.82rem">
+      <input type="number" value="${h.pre}" placeholder="Gs. Unit" step="any" data-hi="${i}" data-hk="pre" style="padding:6px;font-size:.82rem">
+      <button type="button" class="bm bdel" data-delh="${i}">✕</button>
+    </div>`;
+    c.appendChild(d);
+  });
+
+  c.querySelectorAll('[data-hi]').forEach(el => el.oninput = e => {
+    const i = +e.target.dataset.hi, k = e.target.dataset.hk;
+    if (k === 'nom') {
+      const val = e.target.value;
+      hers[i].nom = val;
+      const found = cfg.hers.find(item => item.nom.toLowerCase() === val.trim().toLowerCase());
+      if (found) {
+        hers[i].pre = found.pre;
+        const row = e.target.closest('.pbox');
+        const preInp = row ? row.querySelector('[data-hk="pre"]') : null;
+        if (preInp) preInp.value = found.pre;
+      }
+    } else {
+      hers[i][k] = parseFloat(e.target.value) || 0;
+    }
+    calc();
+  });
+  c.querySelectorAll('[data-delh]').forEach(b => b.onclick = () => { hers.splice(+b.dataset.delh, 1); renderHers(); calc(); });
+}
+
+function optimizarCortes2D(piezas, ancTab, altTab, kerf = 0.4) {
+  const rectas = [];
+  piezas.forEach(p => {
+    for (let k = 0; k < p.cant; k++) {
+      rectas.push({ nom: p.nom || 'Pieza', mod: p.modNom || '', w: p.anc, h: p.alt });
+    }
+  });
+  // Ordenar por lado mayor descendente para mejor aprovechamiento
+  rectas.sort((a, b) => Math.max(b.w, b.h) - Math.max(a.w, a.h) || (b.w * b.h) - (a.w * a.h));
+
+  const planchas = []; // cada plancha tiene { w: ancTab, h: altTab, franjas: [], colocadas: [] }
+
+  rectas.forEach(pz => {
+    let ubicada = false;
+
+    for (const pl of planchas) {
+      // 1) Intentar ubicar en una franja horizontal existente
+      for (const fr of pl.franjas) {
+        const opciones = [
+          { w: pz.w, h: pz.h, rot: false },
+          { w: pz.h, h: pz.w, rot: true }
+        ];
+        for (const op of opciones) {
+          if (op.h <= fr.h && fr.x + op.w <= pl.w + 0.001) {
+            pl.colocadas.push({ nom: pz.nom, mod: pz.mod, x: fr.x, y: fr.y, w: op.w, h: op.h, origW: pz.w, origH: pz.h, rot: op.rot });
+            fr.x += op.w + kerf;
+            ubicada = true;
+            break;
+          }
+        }
+        if (ubicada) break;
+      }
+      if (ubicada) break;
+
+      // 2) Crear nueva franja en esta plancha
+      const yLibre = pl.franjas.reduce((acc, f) => acc + f.h + kerf, 0);
+      const opciones = [
+        { w: pz.w, h: pz.h, rot: false },
+        { w: pz.h, h: pz.w, rot: true }
+      ].filter(op => op.w <= pl.w + 0.001 && yLibre + op.h <= pl.h + 0.001);
+
+      // Elegir la orientación que deje menor altura de franja si ambas caben
+      opciones.sort((a, b) => a.h - b.h);
+      if (opciones.length) {
+        const op = opciones[0];
+        const nuevaFranja = { y: yLibre, h: op.h, x: op.w + kerf };
+        pl.franjas.push(nuevaFranja);
+        pl.colocadas.push({ nom: pz.nom, mod: pz.mod, x: 0, y: yLibre, w: op.w, h: op.h, origW: pz.w, origH: pz.h, rot: op.rot });
+        ubicada = true;
+        break;
+      }
+    }
+
+    // 3) Abrir una plancha nueva si no cupo en las anteriores
+    if (!ubicada) {
+      const opciones = [
+        { w: pz.w, h: pz.h, rot: false },
+        { w: pz.h, h: pz.w, rot: true }
+      ].filter(op => op.w <= ancTab + 0.001 && op.h <= altTab + 0.001);
+      opciones.sort((a, b) => a.h - b.h);
+      const op = opciones[0] || { w: Math.min(pz.w, ancTab), h: Math.min(pz.h, altTab), rot: false };
+      const nuevaPl = {
+        w: ancTab,
+        h: altTab,
+        franjas: [{ y: 0, h: op.h, x: op.w + kerf }],
+        colocadas: [{ nom: pz.nom, mod: pz.mod, x: 0, y: 0, w: op.w, h: op.h, origW: pz.w, origH: pz.h, rot: op.rot }]
+      };
+      planchas.push(nuevaPl);
+    }
+  });
+
+  return planchas;
+}
+
+function calcularResumenMateriales(listaPzas, despPct) {
+  let costoMat = 0, m2Tot = 0, detPzas = '';
+  const porMat = {};
+
+  (listaPzas || []).forEach(p => {
+    const cant = parseFloat(p.cant) || 0, anc = parseFloat(p.ancho) || 0, alt = parseFloat(p.alto) || 0;
+    if (cant > 0 && anc > 0 && alt > 0) {
+      const area = (cant * anc * alt) / 10000;
+      m2Tot += area;
+      let mat = null;
+      if (p.matIdx !== '' && p.matIdx !== undefined && cfg.mats[p.matIdx]) {
+        mat = cfg.mats[p.matIdx];
+      } else if (p.matNom) {
+        mat = cfg.mats.find(m => m.nom.toLowerCase() === p.matNom.trim().toLowerCase());
+      }
+      if (!mat) mat = cfg.mats[0] || { nom: 'Tablero estándar', pre: 0, anc: 275, alt: 183 };
+
+      const key = `${mat.nom}|${mat.pre}|${mat.anc || 275}|${mat.alt || 183}`;
+      if (!porMat[key]) {
+        porMat[key] = { nom: mat.nom, pre: parseFloat(mat.pre) || 0, anc: parseFloat(mat.anc) || 275, alt: parseFloat(mat.alt) || 183, m2: 0, piezas: [] };
+      }
+      porMat[key].m2 += area;
+      porMat[key].piezas.push({ nom: p.nom || 'Pieza', modNom: p.modNom || '', cant, anc, alt });
+      detPzas += `<div>• ${cant}× ${p.nom || 'Pieza'} (${anc}×${alt} cm) [${mat.nom}] = ${area.toFixed(2)} m²</div>`;
+    }
+  });
+
+  const laminas = [];
+  Object.values(porMat).forEach(g => {
+    const m2Tab = (g.anc * g.alt) / 10000;
+    const exactas = m2Tab > 0 ? (g.m2 * (1 + despPct / 100)) / m2Tab : 0;
+    const planchas2D = optimizarCortes2D(g.piezas, g.anc, g.alt, 0.4);
+    const enteras = Math.max(Math.ceil(exactas), planchas2D.length);
+    costoMat += exactas * g.pre;
+    laminas.push({ nom: g.nom, pre: g.pre, anc: g.anc, alt: g.alt, m2: g.m2, exactas, enteras, planchas2D });
+  });
+
+  return { costoMat, m2Tot, detPzas, laminas };
+}
+
+function calc() {
+  const despPct = parseFloat($('cfgDesp').value) || cfg.desp || 0;
+  const resMat = calcularResumenMateriales(obtenerTodasLasPzas(mods), despPct);
+
+  $('lblM2Tot').textContent = resMat.m2Tot.toFixed(2) + ' m²';
+  $('rDespPct').textContent = despPct;
+  $('rMat').textContent = gs(resMat.costoMat);
+
+  let htmlLaminas = '';
+  if (resMat.laminas.length) {
+    htmlLaminas = '<div style="margin-top:4px;padding:5px 7px;background:#fef3c7;border-radius:6px;color:#78350f;font-weight:600">'
+      + resMat.laminas.map(l => `📦 Pedir: <strong>${l.enteras} plancha(s)</strong> de ${l.nom} (${l.anc}×${l.alt} cm) <span style="font-weight:400">[uso: ${l.exactas.toFixed(2)}]</span>`).join('<br>')
+      + '</div>';
+  }
+  let detPorModulo = '';
+  mods.forEach((m, mi) => {
+    const pzasValid = (m.pzas || []).filter(p => (parseFloat(p.cant) || 0) > 0 && (parseFloat(p.ancho) || 0) > 0 && (parseFloat(p.alto) || 0) > 0);
+    if (!pzasValid.length) return;
+    const tituloMod = (m.nom || '').trim() || `Módulo ${mi + 1}`;
+    detPorModulo += `<div style="margin-top:5px;font-weight:700;color:#78350f">📦 ${tituloMod}:</div>`;
+    pzasValid.forEach(p => {
+      const cant = parseFloat(p.cant) || 0, anc = parseFloat(p.ancho) || 0, alt = parseFloat(p.alto) || 0;
+      const area = (cant * anc * alt) / 10000;
+      const mat = (p.matIdx !== '' && p.matIdx !== undefined && cfg.mats[p.matIdx]) ? cfg.mats[p.matIdx] : (cfg.mats.find(x => x.nom === p.matNom) || { nom: p.matNom || 'Tablero' });
+      detPorModulo += `<div style="padding-left:8px">• ${cant}× ${p.nom || 'Pieza'} (${anc}×${alt} cm) [${mat.nom}] = ${area.toFixed(2)} m²</div>`;
+    });
+  });
+$('rDetPzas').innerHTML = htmlLaminas;
+
+  let costoHer = 0, detHers = '';
+  hers.forEach(h => {
+    const sub = (parseFloat(h.cant) || 0) * (parseFloat(h.pre) || 0);
+    if (sub > 0 || h.nom) { costoHer += sub; detHers += `<div>• ${h.cant}× ${h.nom || 'Insumo'} = ${gs(sub)}</div>`; }
+  });
+  $('lblHerTot').textContent = gs(costoHer); $('rHer').textContent = gs(costoHer); $('rDetHers').innerHTML = detHers;
+
+  const subMatHer = resMat.costoMat + costoHer;
+  const marPct = parseFloat($('cfgMar')?.value) || parseFloat(cfg.mar) || parseFloat($('mar')?.value) || 0;
+  const manoObra = Math.round(subMatHer * (marPct / 100));
+  const base = subMatHer + manoObra;
+
+  const compTipo = $('compTipo')?.value || 'gs';
+  const compVal = parseFloat($('compVal')?.value) || 0;
+  const mo = compTipo === 'pct' ? Math.round(base * (compVal / 100)) : compVal;
+  if ($('lblComp')) {
+    $('lblComp').textContent = compTipo === 'pct' && compVal > 0
+      ? `Complejidad de trabajo (${compVal}%):`
+      : 'Complejidad de trabajo:';
+  }
+
+  const fle = parseFloat($('fle').value) || 0;
+  const total = base + mo + fle;
+
+  $('rMarPct').textContent = marPct;
+  $('rGan').textContent = gs(manoObra);
+  $('rBase').textContent = gs(base);
+  $('rMo').textContent = gs(mo);
+  $('rFle').textContent = gs(fle);
+  $('rPre').textContent = gs(total);
+}
+
+async function generarPDFPresupuesto(d, abrirWa = true) {
+ const totSinIvaNum = parseInt(String(d.tot || '0').replace(/\D/g, ''), 10) || 0;
+ const iva10 = Math.round(totSinIvaNum * 0.10);
+ const totConIva = totSinIvaNum + iva10;
+
+ const btn = null;
+  const txtOrig = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Generando PDF...'; }
+
+  let wrap = null;
+  try {
+    if (!window.html2pdf) {
+      await new Promise((res, rej) => {
+        const s = document.createElement('script');
+        s.src = 'https://' + 'cdnjs.cloudflare' + '.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+        s.onload = res; s.onerror = rej; document.head.appendChild(s);
+      });
+    }
+
+ const cliClean = (d.cli || 'Cliente').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-zA-Z0-9\s]/g, '').trim().replace(/\s+/g, '_');
+ const fecClean = (d.fec || new Date().toLocaleDateString('es-PY')).replace(/\//g, '-');
+ const fileName = `Presupuesto_${fmtCorrelativo(d.num || 1)}_${cliClean || 'Cliente'}_${fecClean}.pdf`;
+
+    const listaMods = (d.mods && d.mods.length) ? d.mods : [{ nom: d.mue || 'Módulo Principal', pzas: d.pzas || [] }];
+    let filasPzas = '';
+    listaMods.forEach((m, idx) => {
+      const pzasValid = (m.pzas || []).filter(p => (p.nom || '').trim() || parseFloat(p.ancho) > 0 || parseFloat(p.alto) > 0);
+      if (!pzasValid.length) return;
+      const nomMod = (m.nom || '').trim() || `Módulo ${idx + 1}`;
+      filasPzas += `<tr><td colspan="3" style="padding:7px 8px;background:#fef3c7;font-weight:700;color:#78350f;border:1px solid #d6d3d1">📦 ${nomMod}</td></tr>`;
+      pzasValid.forEach(p => {
+        const matNom = p.matNom || (cfg.mats[p.matIdx]?.nom) || 'Tablero estándar';
+        filasPzas += `<tr>
+          <td style="padding:6px 8px;border:1px solid #d6d3d1">${p.cant || 1}× ${p.nom || 'Pieza'}</td>
+          <td style="padding:6px 8px;border:1px solid #d6d3d1">${matNom}</td>
+          <td style="padding:6px 8px;border:1px solid #d6d3d1;text-align:center">${p.ancho || 0} × ${p.alto || 0} cm</td>
+        </tr>`;
+      });
+    });
+
+    let htmlHers = '';
+    (d.hers || []).forEach(h => {
+      const cant = parseFloat(h.cant) || 0;
+      if (cant > 0 || h.nom) {
+        htmlHers += `<div style="margin-bottom:3px">• ${cant}× ${h.nom || 'Insumo'}</div>`;
+      }
+    });
+
+    const hrs = parseFloat(d.hrs) || 0, fle = parseFloat(d.fle) || 0;
+
+    wrap = document.createElement('div');
+    wrap.style.cssText = 'position:fixed;left:0;top:0;width:720px;background:#fff;z-index:-9999;opacity:0.01;pointer-events:none';
+    wrap.innerHTML = `<div id="pdfCard" style="padding:26px;font-family:'Segoe UI',sans-serif;color:#292524;background:#fff;display:block;width:100%;box-sizing:border-box">
+      <div style="border-bottom:3px solid #78350f;padding-bottom:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+     <div style="display:flex;align-items:center;gap:12px">
+       ${cfg.tallLogo ? `<img src="${cfg.tallLogo}" style="max-height:78px;max-width:180px;object-fit:contain">` : ''}
+       <div>
+         <div style="font-size:13px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.5px">${cfg.tallNom || 'TALLER DE MUEBLES'}${cfg.tallTel ? ' • Tel: ' + cfg.tallTel : ''}</div>
+         <h2 style="color:#78350f;margin:2px 0 0 0;font-size:20px">🪚 PRESUPUESTO DE MUEBLE A MEDIDA</h2>
+         <div style="font-size:12px;color:#78716c;margin-top:4px">Fecha: ${d.fec || new Date().toLocaleDateString('es-PY')}</div>
+       </div>
+     </div>
+        <div style="background:#fef3c7;border:1px solid #f59e0b;color:#78350f;padding:6px 12px;border-radius:8px;font-weight:800;font-size:14px;white-space:nowrap">
+          Presupuesto N° ${fmtCorrelativo(d.num || 1)}
+        </div>
+      </div>
+
+      <div style="background:#fafaf9;border:1px solid #e7e5e4;border-radius:8px;padding:12px;margin-bottom:14px;font-size:13px;line-height:1.6">
+        ${d.cli ? `<div><strong>👤 Cliente:</strong> ${d.cli}</div>` : ''}
+        ${d.tel ? `<div><strong>📞 WhatsApp:</strong> ${d.tel}</div>` : ''}
+        ${d.mue ? `<div><strong>🪑 Proyecto:</strong> ${d.mue}</div>` : ''}
+        ${d.dir ? `<div><strong>📍 Dirección / Entrega:</strong> ${d.dir}</div>` : ''}
+      </div>
+
+      <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:14px;font-size:13px">
+        ${filasPzas ? `
+        <div style="font-weight:700;color:#78350f;margin-bottom:6px">📐 Despiece por Módulos y Materiales:</div>
+        <table style="width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:12px;background:#fff">
+          <thead>
+            <tr style="background:#78350f;color:#fff">
+              <th style="padding:6px 8px;text-align:left;border:1px solid #78350f">Pieza</th>
+              <th style="padding:6px 8px;text-align:left;border:1px solid #78350f">Material</th>
+              <th style="padding:6px 8px;text-align:center;border:1px solid #78350f">Medidas</th>
+            </tr>
+          </thead>
+          <tbody>${filasPzas}</tbody>
+        </table>` : ''}
+
+        ${htmlHers ? `
+        <div style="font-weight:700;color:#78350f;margin-bottom:4px">🔩 Herrajes e Insumos Incluidos:</div>
+        <div style="margin-bottom:10px;padding-left:6px;font-size:12.5px;color:#44403c">${htmlHers}</div>` : ''}
+
+        <div style="border-top:1px solid #fde68a;padding-top:8px;margin-top:6px;display:flex;justify-content:space-between;margin-bottom:4px">
+          <span>Fabricación, armado e instalación:</span><strong>Incluido</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+          <span>Traslado / Entrega en domicilio:</span><strong>${fle > 0 ? 'Incluido' : 'A convenir'}</strong>
+        </div>
+
+        <div style="background:#78350f;color:#fff;padding:12px;border-radius:8px;display:flex;justify-content:space-between;font-size:15px;font-weight:800">
+          <span>TOTAL PRESUPUESTO (Sin IVA):</span><span>${d.tot}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 12px;background:#fef3c7;border-left:4px solid #d97706;border-radius:6px;margin-top:6px;font-size:12px;color:#78350f">
+          <span>IVA (10% - en caso de requerir factura):</span>
+          <strong>${gs(iva10)}</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:9px 12px;background:#f5f5f4;border-left:4px solid #57534e;border-radius:6px;margin-top:5px;font-size:13px;color:#1c1917">
+          <span><strong>TOTAL CON IVA INCLUIDO (10%):</strong></span>
+          <strong>${gs(totConIva)}</strong>
+        </div>
+
+        <div style="margin-top:12px;font-size:11px;color:#78716c;text-align:center">
+          Presupuesto válido por 15 días. Quedamos a disposición para confirmar medidas, colores y fecha de entrega.
+        </div>
+      </div>
+    </div>`;
+    document.body.appendChild(wrap);
+
+    const opt = {
+      margin: 8,
+      filename: fileName,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    const pdfBlob = await html2pdf().set(opt).from(wrap.querySelector('#pdfCard')).outputPdf('blob');
+    const pdfFile = new File([pdfBlob], fileName, { type: 'application/pdf' });
+
+    if (!abrirWa) {
+      const url = URL.createObjectURL(pdfBlob);
+      const a = document.createElement('a');
+      a.href = url; a.download = fileName; a.click();
+      URL.revokeObjectURL(url);
+      return;
+    }
+
+    if (navigator.canShare && navigator.canShare({ files: [pdfFile] })) {
+      await navigator.share({
+        files: [pdfFile],
+        title: fileName,
+        text: `Hola ${d.cli || ''}, te adjunto el presupuesto detallado en PDF${d.mue ? ' para ' + d.mue : ''}.`
+      });
+    } else {
+      const url = URL.createObjectURL(pdfBlob);
+      const a = document.createElement('a');
+      a.href = url; a.download = fileName; a.click();
+      URL.revokeObjectURL(url);
+
+      let tel = (d.tel || '').replace(/\D/g, '');
+      if (tel.startsWith('0')) tel = '595' + tel.slice(1);
+      else if (tel.length === 9 && tel.startsWith('9')) tel = '595' + tel;
+      const msg = `Hola ${d.cli || ''}, te envío adjunto el presupuesto detallado en PDF${d.mue ? ' para *' + d.mue + '*' : ''} por un total de *${d.tot}*.`;
+      setTimeout(() => {
+        window.open('https://' + 'api.whatsapp' + '.com/send?' + (tel ? 'phone=' + tel + '&' : '') + 'text=' + encodeURIComponent(msg), '_blank');
+      }, 400);
+    }
+  } catch (e) {
+    if (e.name !== 'AbortError') alert('No se pudo generar el PDF: ' + e.message);
+  } finally {
+    if (wrap && wrap.parentNode) wrap.parentNode.removeChild(wrap);
+    if (btn) { btn.disabled = false; btn.textContent = txtOrig; }
+  }
+}
+
+function enviarWhatsApp(d) {
+  generarPDFPresupuesto(d, true);
+}
+
+function bloquearCotizador(bloquear) {
+  const sec = $('secCot');
+  if (!sec) return;
+  sec.querySelectorAll('input, select, textarea').forEach(el => {
+    if (el.id !== 'pxh') el.disabled = bloquear;
+  });
+  sec.querySelectorAll('button').forEach(btn => {
+    if (btn.id === 'bClr' || btn.id === 'bHist' || btn.closest('#hBox')) return;
+    btn.disabled = bloquear;
+    btn.style.opacity = bloquear ? '0.5' : '1';
+    btn.style.cursor = bloquear ? 'not-allowed' : 'pointer';
+  });
+}
+
+
+function cargarCotizacion(it) {
+  if (!it) return;
+  $('cNom').value = it.cli || ''; $('cTel').value = it.tel || '';
+  $('cMue').value = it.mue || ''; $('cDir').value = it.dir || '';
+  if ($('compTipo')) $('compTipo').value = it.compTipo || 'gs';
+  if ($('compVal')) $('compVal').value = it.compVal || 0;
+  $('fle').value = it.fle !== undefined ? it.fle : cfg.fle; $('mar').value = it.mar !== undefined ? it.mar : cfg.mar;
+  if (it.mods && it.mods.length) {
+    mods = JSON.parse(JSON.stringify(it.mods));
+  } else {
+mods = [{ nom: it.mue || '', ph: 'Ej: Bajo mesada / Cuerpo principal', abierto: true, pzas: it.pzas ? JSON.parse(JSON.stringify(it.pzas)) : [] }];
+  }
+  hers = it.hers ? JSON.parse(JSON.stringify(it.hers)) : [];
+  renderMods(); renderHers(); calc();
+  bloquearCotizador(true);
+  document.querySelector('[data-sec="secCot"]')?.click();
+  if ($('badgeNumCot')) {
+    $('badgeNumCot').dataset.cargado = '1';
+    $('badgeNumCot').textContent = 'Presupuesto N° ' + fmtCorrelativo(it.num || 1);
+  }
+
+
+  if ($('busqHis')) {
+  $('busqHis').oninput = () => {
+    const q = $('busqHis').value.toLowerCase().trim();
+    $('hLst')?.querySelectorAll('.hit').forEach(row => {
+      row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  };
+
+  if ($('busqOrd')) {
+  $('busqOrd').oninput = () => {
+    const q = $('busqOrd').value.toLowerCase().trim();
+    $('ordLst')?.querySelectorAll('.hit').forEach(row => {
+      row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  };
+}
+
+}
+}
+
+function obtenerSiguienteCorrelativo() {
+  if (typeof cfg.ultimoNum === 'number' && cfg.ultimoNum >= 0) {
+    return cfg.ultimoNum + 1;
+  }
+  return cots.reduce((m, it) => Math.max(m, Number(it.num) || 0), 0) + 1;
+}
+
+function actualizarBadgeCorrelativo() {
+  if ($('badgeNumCot')) {
+    $('badgeNumCot').textContent = 'Presupuesto N° ' + String(obtenerSiguienteCorrelativo()).padStart(4, '0');
+  }
+}
+
+
+function renderHist() {
+  $('hCnt').textContent = cots.length;
+  const bx = $('hLst'); bx.innerHTML = '';
+  if (!cots.length) { bx.innerHTML = '<div style="font-size:.82rem;color:#78716c">Sin presupuestos guardados.</div>'; return; }
+  cots.forEach((it, idx) => {
+    const d = document.createElement('div'); d.className = 'hit';
+    const badge = it.anulado
+      ? '<span style="background:#fee2e2;color:#991b1b;padding:2px 7px;border-radius:6px;font-size:.74rem;font-weight:700">🚫 ANULADO</span>'
+      : (it.pagado
+        ? '<span style="background:#dcfce7;color:#166534;padding:2px 7px;border-radius:6px;font-size:.74rem">✅ PAGADO</span>'
+        : '<span style="background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:6px;font-size:.74rem">⏳ PENDIENTE</span>');
+
+    const btnPag = it.anulado
+      ? ''
+      : (it.pagado
+        ? `<button type="button" class="bm" style="background:#57534e" data-pag="${it.id}" data-st="1">↩️ Quitar Pagado</button>`
+        : `<button type="button" class="bm" style="background:#16a34a" data-pag="${it.id}" data-st="0">💰 Marcar Pagado</button>`);
+
+    const btnAnu = it.anulado
+      ? `<button type="button" class="bm" style="background:#0284c7" data-anu="${it.id}" data-st="1">↩️ Reactivar</button>`
+      : `<button type="button" class="bm" style="background:#dc2626" data-anu="${it.id}" data-st="0">🚫 Anular</button>`;
+
+    if (it.anulado) d.style.opacity = '0.72';
+
+    d.innerHTML = `<div class="hhd" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px"><span><span style="background:#fef3c7;color:#78350f;padding:2px 6px;border-radius:5px;font-weight:800;font-size:.75rem;margin-right:6px">N° ${fmtCorrelativo(it.num || (cots.length - idx))}</span>${it.cli || 'Sin nombre'} - ${it.mue || 'Mueble'} ${badge}</span><span style="font-weight:800;${it.anulado ? 'text-decoration:line-through;color:#991b1b' : ''}">${it.tot}</span></div><div style="width:100%;display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-top:4px"><div class="hacts" style="margin:0">${'<button type="button" class="bm" style="background:#78350f" data-load="' + idx + '">👁️ Visualizar</button>'}${btnPag}<button type="button" class="bm bpdf" data-p="${idx}">📄 PDF</button>${it.anulado ? '' : `<button type="button" class="bm bwa" data-w="${idx}">💬 WhatsApp</button>`}${btnAnu}</div><div style="font-size:.76rem;color:#78716c;text-align:right;margin-left:auto;line-height:1.1">📅 ${it.fec || ''}${it.tel ? ' • 📱 ' + it.tel : ''}${it.dir ? ' • 📍 ' + it.dir : ''}</div></div>`;
+    bx.appendChild(d);
+  });
+  bx.querySelectorAll('[data-load]').forEach(b => b.onclick = () => { cargarCotizacion(cots.at(+b.dataset.load)); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  bx.querySelectorAll('[data-pag]').forEach(b => b.onclick = () => db.collection('users').doc(uid).collection('cotizaciones').doc(b.dataset.pag).update({ pagado: b.dataset.st !== '1' }));
+  bx.querySelectorAll('[data-w]').forEach(b => b.onclick = () => enviarWhatsApp(cots.at(+b.dataset.w)));
+  bx.querySelectorAll('[data-p]').forEach(b => b.onclick = () => generarPDFPresupuesto(cots.at(+b.dataset.p), false));
+  bx.querySelectorAll('[data-anu]').forEach(b => b.onclick = () => {
+    const yaAnulado = b.dataset.st === '1';
+    if (!confirm(yaAnulado ? '¿Reactivar este presupuesto?' : '¿Anular este presupuesto? No se eliminará del historial, pero quedará marcado como ANULADO y no sumará en estadísticas ni en órdenes de compra.')) return;
+    db.collection('users').doc(uid).collection('cotizaciones').doc(b.dataset.anu).update({
+      anulado: !yaAnulado,
+      pagado: false
+    });
+  });
+  actualizarBadgeCorrelativo();
+}
+
+function renderOrdenes() {
+  const bx = $('ordLst');
+  if (!bx) return;
+  bx.innerHTML = '';
+
+  const cotsVigentes = cots
+    .map((it, origIdx) => ({ it, origIdx }))
+    .filter(({ it }) => !it.anulado);
+
+  if (!cotsVigentes.length) {
+    bx.innerHTML = '<div style="font-size:.82rem;color:#78716c">Aún no hay presupuestos vigentes para generar órdenes de pedido.</div>';
+    return;
+  }
+  const despPct = parseFloat(cfg.desp) || 10;
+
+  cotsVigentes.forEach(({ it, origIdx }, idx) => {
+    const listaPzas = (it.mods && it.mods.length) ? obtenerTodasLasPzas(it.mods) : (it.pzas || []);
+    const resMat = calcularResumenMateriales(listaPzas, despPct);
+    const hersValid = (it.hers || []).filter(h => h.nom || h.cant);
+    const totPlanchas = resMat.laminas.reduce((acc, l) => acc + l.enteras, 0);
+
+    let detLaminas = resMat.laminas.length
+      ? resMat.laminas.map(l => `<div>• <strong>${l.enteras} plancha(s)</strong> — ${l.nom} (${l.anc}×${l.alt} cm) <span style="color:#78716c">[uso real: ${l.exactas.toFixed(2)}]</span></div>`).join('')
+      : '<div style="color:#78716c">Sin tableros cargados</div>';
+
+    let detHers = hersValid.length
+      ? hersValid.map(h => `<div>• <strong>${h.cant || 1}×</strong> ${h.nom || 'Insumo'}</div>`).join('')
+      : '<div style="color:#78716c">Sin herrajes cargados</div>';
+
+    const badge = it.pagado
+      ? '<span style="background:#dcfce7;color:#166534;padding:2px 7px;border-radius:6px;font-size:.72rem">✅ PAGADO</span>'
+      : '<span style="background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:6px;font-size:.72rem">⏳ PENDIENTE</span>';
+
+    const numCorr = fmtCorrelativo(it.num || (cots.length - origIdx));
+
+    const d = document.createElement('div');
+    d.className = 'hit';
+    d.innerHTML = `
+      <div class="hhd">
+        <span><span style="background:#e0f2fe;color:#0369a1;padding:2px 6px;border-radius:5px;font-weight:800;font-size:.75rem;margin-right:6px">OC-${numCorr}</span>👤 ${it.cli || 'Sin nombre'} — 🪑 ${it.mue || 'Mueble a medida'}</span>
+        ${badge}
+      </div>
+      <div style="font-size:.78rem;color:#57534e;margin:0">📅 ${it.fec} | 🪵 <strong>${totPlanchas}</strong> plancha(s) | 🔩 <strong>${hersValid.length}</strong> ítem(s) de herrajes</div>
+      <div id="ordDet_${idx}" class="hd" style="margin-top:8px;padding:9px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;font-size:.8rem;line-height:1.5;width:100%;order:3">
+        <div style="font-weight:700;color:#78350f;margin-bottom:3px">🪵 Planchas / Tableros a pedir:</div>
+        <div style="margin-bottom:8px;padding-left:6px">${detLaminas}</div>
+        <div style="font-weight:700;color:#78350f;margin-bottom:3px">🔩 Herrajes e Insumos:</div>
+        <div style="padding-left:6px">${detHers}</div>
+      </div>
+      <div class="hacts" style="margin-top:8px">
+        <button type="button" class="bm" style="background:#78350f" data-verord="${idx}">👁️ Ver Pedido</button>
+        <button type="button" class="bm bpdf" data-pdford="${origIdx}">📄 Descargar PDF</button>
+        <button type="button" class="bm bwa" data-envord="${origIdx}">💬 Pedir por WhatsApp</button>
+      </div>`;
+    bx.appendChild(d);
+  });
+
+  bx.querySelectorAll('[data-verord]').forEach(b => b.onclick = () => {
+    const det = $('ordDet_' + b.dataset.verord);
+    if (det) {
+      det.classList.toggle('hd');
+      b.textContent = det.classList.contains('hd') ? '👁️ Ver Pedido' : '🙈 Ocultar Pedido';
+    }
+  });
+  bx.querySelectorAll('[data-pdford]').forEach(b => b.onclick = () => descargarPDFOrdenProveedor(cots.at(+b.dataset.pdford), b));
+  bx.querySelectorAll('[data-envord]').forEach(b => b.onclick = () => enviarOrdenProveedor(cots.at(+b.dataset.envord)));
+}
+
+async function descargarPDFOrdenProveedor(d, btn) {
+  if (!d) return;
+  const despPct = parseFloat(cfg.desp) || 10;
+  const listaPzas = (d.mods && d.mods.length) ? obtenerTodasLasPzas(d.mods) : (d.pzas || []);
+  const resMat = calcularResumenMateriales(listaPzas, despPct);
+  const hersValid = (d.hers || []).filter(h => (h.nom || '').trim() && parseFloat(h.cant) > 0);
+
+  if (!resMat.laminas.length && !hersValid.length) {
+    alert('Este proyecto no tiene tableros ni herrajes cargados.');
+    return;
+  }
+
+  const txtOrig = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ PDF...'; }
+
+  let wrap = null;
+  try {
+    if (!window.html2pdf) {
+      await new Promise((res, rej) => {
+        const s = document.createElement('script');
+        s.src = 'https://' + 'cdnjs.cloudflare' + '.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+        s.onload = res; s.onerror = rej; document.head.appendChild(s);
+      });
+    }
+
+    const proyNom = (d.mue || 'Proyecto').replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]/g, '').trim().replace(/\s+/g, '_');
+    const fecNom = (d.fec || new Date().toLocaleDateString('es-PY')).replace(/\//g, '-');
+    const numOrdStr = fmtCorrelativo(d.num || 1);
+    const fileName = `Orden_Compra_OC_${numOrdStr}_${proyNom || 'Materiales'}_${fecNom}.pdf`;
+
+    let filasMat = resMat.laminas.map(l => `
+      <tr>
+        <td style="padding:7px 9px;border:1px solid #d6d3d1;font-weight:700;text-align:center">${l.enteras} plancha(s)</td>
+        <td style="padding:7px 9px;border:1px solid #d6d3d1">${l.nom}</td>
+        <td style="padding:7px 9px;border:1px solid #d6d3d1;text-align:center">${l.anc} × ${l.alt} cm</td>
+      </tr>`).join('');
+
+    let filasHer = hersValid.map(h => `
+      <tr>
+        <td style="padding:7px 9px;border:1px solid #d6d3d1;font-weight:700;text-align:center">${h.cant} unid.</td>
+        <td colspan="2" style="padding:7px 9px;border:1px solid #d6d3d1">${h.nom}</td>
+      </tr>`).join('');
+
+    // Generar diagramas visuales 2D por cada plancha
+    let htmlPlanos2D = '';
+    const colores = ['#fef3c7', '#dbeafe', '#dcfce7', '#fce7f3', '#e0e7ff', '#ffedd5'];
+    resMat.laminas.forEach(l => {
+      (l.planchas2D || []).forEach((pl, pi) => {
+        const maxW = 640;
+        const escala = maxW / pl.w;
+        const boxH = Math.round(pl.h * escala);
+        const areaUsada = pl.colocadas.reduce((acc, c) => acc + (c.w * c.h), 0);
+        const pctUso = Math.min(100, Math.round((areaUsada / (pl.w * pl.h)) * 100));
+
+          const rectsHtml = pl.colocadas.map((c, ci) => {
+          const rx = (c.x * escala).toFixed(1);
+          const ry = (c.y * escala).toFixed(1);
+          const rw = Math.max(2, (c.w * escala) - 1).toFixed(1);
+          const rh = Math.max(2, (c.h * escala) - 1).toFixed(1);
+          const bg = colores[ci % colores.length];
+          const rotTag = c.rot ? ' ↻' : '';
+          const modTxt = (c.mod || '').trim();
+          const esAngosta = (c.h * escala) < 28;
+
+          const contenido = esAngosta
+            ? `<div style="font-size:7.5px;font-weight:700;color:#1c1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:97%">${modTxt ? modTxt + ' — ' : ''}${c.nom}${rotTag} (${c.origW}×${c.origH})</div>`
+            : `${modTxt ? `<div style="font-size:8.5px;font-weight:800;color:#78350f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:96%">${modTxt}</div>` : ''}
+               <div style="font-size:8.5px;font-weight:600;color:#1c1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:96%">(${c.nom} ${c.origW}×${c.origH})${rotTag}</div>`;
+
+          return `<div style="position:absolute;left:${rx}px;top:${ry}px;width:${rw}px;height:${rh}px;background:${bg};border:1px solid #78350f;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:1px;line-height:1.15">
+            ${contenido}
+          </div>`;
+        }).join('');
+
+
+        htmlPlanos2D += `
+          <div style="margin-bottom:14px;page-break-inside:avoid">
+            <div style="font-size:12px;font-weight:700;color:#44403c;margin-bottom:4px;display:flex;justify-content:space-between">
+              <span>🪵 ${l.nom} — Plancha #${pi + 1} (${pl.w} × ${pl.h} cm)</span>
+              <span style="color:#166534">Aprovechamiento: ${pctUso}%</span>
+            </div>
+            <div style="position:relative;width:${maxW}px;height:${boxH}px;background:#f5f5f4;border:2px solid #44403c;box-sizing:content-box">
+              ${rectsHtml}
+            </div>
+          </div>`;
+      });
+    });
+
+    wrap = document.createElement('div');
+    wrap.style.cssText = 'position:fixed;left:0;top:0;width:720px;background:#fff;z-index:-9999;opacity:0.01;pointer-events:none';
+    wrap.innerHTML = `<div id="pdfOrdCard" style="padding:26px;font-family:'Segoe UI',sans-serif;color:#292524;background:#fff">
+   <div style="border-bottom:3px solid #78350f;padding-bottom:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+     <div style="display:flex;align-items:center;gap:12px">
+       ${cfg.tallLogo ? `<img src="${cfg.tallLogo}" style="max-height:78px;max-width:180px;object-fit:contain">` : ''}
+       <div>
+         <div style="font-size:13px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.5px">${cfg.tallNom || 'TALLER DE MUEBLES'}${cfg.tallTel ? ' • Tel: ' + cfg.tallTel : ''}</div>
+         <h2 style="color:#78350f;margin:3px 0 0 0;font-size:20px">📦 LISTA DE COMPRA Y PLANO DE CORTE 2D</h2>
+         <div style="font-size:12px;color:#57534e;margin-top:4px">Fecha: ${new Date().toLocaleDateString('es-PY')} | Proyecto: <strong>${d.mue || 'Mueble a medida'}</strong> ${d.cli ? '(Cliente: ' + d.cli + ')' : ''}</div>
+       </div>
+     </div>
+     <div style="background:#e0f2fe;border:1px solid #0284c7;color:#0369a1;padding:6px 12px;border-radius:8px;font-weight:800;font-size:14px;white-space:nowrap">
+       Orden N° OC-${numOrdStr}
+     </div>
+   </div>
+
+      ${resMat.laminas.length ? `
+      <div style="font-weight:700;color:#78350f;font-size:14px;margin-bottom:6px">🪵 Tableros / Planchas Enteras</div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px">
+        <thead><tr style="background:#78350f;color:#fff"><th style="padding:7px;width:125px">Cantidad</th><th style="padding:7px;text-align:left">Material / Tablero</th><th style="padding:7px;width:130px">Medida Plancha</th></tr></thead>
+        <tbody>${filasMat}</tbody>
+      </table>` : ''}
+
+      ${hersValid.length ? `
+      <div style="font-weight:700;color:#78350f;font-size:14px;margin-bottom:6px">🔩 Herrajes e Insumos</div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px">
+        <thead><tr style="background:#44403c;color:#fff"><th style="padding:7px;width:125px">Cantidad</th><th colspan="2" style="padding:7px;text-align:left">Descripción del Insumo</th></tr></thead>
+        <tbody>${filasHer}</tbody>
+      </table>` : ''}
+
+      ${htmlPlanos2D ? `
+      <div style="font-weight:700;color:#78350f;font-size:14px;margin:14px 0 8px 0;border-top:2px solid #e7e5e4;padding-top:10px">📐 Esquema Visual de Cortes por Plancha (Sierra 4 mm • ↻ = pieza rotada)</div>
+      ${htmlPlanos2D}` : ''}
+
+      <div style="margin-top:14px;font-size:11px;color:#78716c;text-align:center">
+        Documento generado para compra en mostrador, corte en barraca o envío a proveedor.
+      </div>
+    </div>`;
+    document.body.appendChild(wrap);
+
+    const opt = {
+      margin: 8,
+      filename: fileName,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    const pdfBlob = await html2pdf().set(opt).from(wrap.querySelector('#pdfOrdCard')).outputPdf('blob');
+    const url = URL.createObjectURL(pdfBlob);
+    const a = document.createElement('a');
+    a.href = url; a.download = fileName; a.click();
+    URL.revokeObjectURL(url);
+  } catch (e) {
+    alert('No se pudo generar el PDF de la orden: ' + e.message);
+  } finally {
+    if (wrap && wrap.parentNode) wrap.parentNode.removeChild(wrap);
+    if (btn) { btn.disabled = false; btn.textContent = txtOrig; }
+  }
+}
+
+function enviarOrdenProveedor(d) {
+  const despPct = parseFloat(cfg.desp) || 10;
+  const listaPzas = (d.mods && d.mods.length) ? obtenerTodasLasPzas(d.mods) : (d.pzas || []);
+  const resMat = calcularResumenMateriales(listaPzas, despPct);
+  const hersValid = (d.hers || []).filter(h => h.nom || h.cant);
+
+  if (!resMat.laminas.length && !hersValid.length) {
+    alert('Este proyecto no tiene tableros ni herrajes cargados.');
+    return;
+  }
+  const numOrdStr = fmtCorrelativo(d.num || 1);
+  let txt = `📦 *ORDEN DE PEDIDO OC-${numOrdStr} — ${(cfg.tallNom || 'TALLER DE MUEBLES').toUpperCase()}*\n`;
+  if (d.mue) txt += `🪑 *Ref. Proyecto:* ${d.mue}\n`;
+  if (d.cli) txt += `👤 *Ref. Cliente:* ${d.cli}\n`;
+  txt += `📅 *Fecha:* ${new Date().toLocaleDateString('es-PY')}\n\n`;
+
+  if (resMat.laminas.length) {
+    txt += '🪵 *TABLEROS / PLANCHAS:*\n';
+    resMat.laminas.forEach(l => {
+      txt += `• *${l.enteras} plancha(s)* — ${l.nom} (${l.anc}×${l.alt} cm)\n`;
+    });
+    txt += '\n';
+  }
+
+  if (hersValid.length) {
+    txt += '🔩 *HERRAJES E INSUMOS:*\n';
+    hersValid.forEach(h => {
+      txt += `• *${h.cant || 1}×* ${h.nom || 'Insumo'}\n`;
+    });
+    txt += '\n';
+  }
+
+  txt += '_Por favor confirmar disponibilidad y presupuesto total de estos materiales. ¡Gracias!_';
+  window.open('https://' + 'api.whatsapp' + '.com/send?text=' + encodeURIComponent(txt), '_blank');
+}
+
+function renderComs() {
+  $('cCnt').textContent = coms.length; const bx = $('cLst'); bx.innerHTML = '';
+  coms.forEach(m => {
+    const d = document.createElement('div'); d.className = 'hit';
+    d.innerHTML = `<div class="hhd"><span>${m.cat}</span><span>${gs(m.mon)}</span></div><div>📅 ${m.fec} | Cant: ${m.can} × ${gs(m.pru)}</div><div class="hacts"><button type="button" class="bm bdel" data-dc="${m.id}">Borrar</button></div>`;
+    bx.appendChild(d);
+  });
+  bx.querySelectorAll('[data-dc]').forEach(b => b.onclick = () => db.collection('users').doc(uid).collection('compras').doc(b.dataset.dc).delete());
+}
+
+function updEst() {
+  let ing = 0, gas = 0, pag = 0;
+  const cotsVigentes = cots.filter(c => !c.anulado);
+  cotsVigentes.forEach(c => {
+    if (c.pagado) {
+      ing += Number((c.tot || '0').replace(/\D/g, '')) || 0;
+      pag++;
+    }
+  });
+  coms.forEach(m => gas += Number(m.mon) || 0);
+  $('erCnt').textContent = pag + ' de ' + cotsVigentes.length;
+  $('erIng').textContent = gs(ing);
+  $('erGas').textContent = gs(gas);
+  $('erNet').textContent = gs(ing - gas);
+}
+
+
+function renderCfgLists() {
+  const fMat = ($('busqMat')?.value || '').trim().toLowerCase();
+  const ml = $('cfgMatLst'); ml.innerHTML = '';
+  cfg.mats.forEach((m, i) => {
+    if (fMat && !m.nom.toLowerCase().includes(fMat)) return;
+    const r = document.createElement('div');
+    r.className = 'pbox';
+    r.style.cssText = 'margin-bottom:8px;background:#fefce8;border:1.5px solid #d97706;border-radius:10px;padding:8px;box-shadow:0 1px 3px rgba(120,53,15,.08)';
+    r.innerHTML = `<div class="lrow" style="margin-bottom:6px">
+      <input type="text" value="${m.nom.replace(/"/g, '&quot;')}" data-mi="${i}" data-mk="nom" style="padding:6px 8px;font-size:.83rem;font-weight:700;background:#fff;border:1px solid #d6d3d1">
+      <input type="number" value="${m.pre}" placeholder="Gs./plancha" data-mi="${i}" data-mk="pre" style="padding:6px 8px;font-size:.83rem;font-weight:600;max-width:110px;background:#fff;border:1px solid #d6d3d1">
+      ${cfg.mats.length > 1 ? `<button type="button" class="bm bdel" data-dm="${i}">✕</button>` : ''}
+    </div>
+    <div class="lrow" style="font-size:.76rem;color:#78350f;align-items:center;gap:6px">
+      <span style="font-weight:600">Ancho (cm):</span>
+      <input type="number" value="${m.anc || 275}" data-mi="${i}" data-mk="anc" style="padding:5px;font-size:.8rem;max-width:68px;background:#fff;border:1px solid #d6d3d1">
+      <span style="font-weight:600;margin-left:4px">Largo (cm):</span>
+      <input type="number" value="${m.alt || 183}" data-mi="${i}" data-mk="alt" style="padding:5px;font-size:.8rem;max-width:68px;background:#fff;border:1px solid #d6d3d1">
+    </div>`;
+    ml.appendChild(r);
+  });
+  ml.querySelectorAll('[data-mi]').forEach(el => el.oninput = e => {
+    const i = +e.target.dataset.mi, k = e.target.dataset.mk;
+    cfg.mats[i][k] = k === 'nom' ? e.target.value : (parseFloat(e.target.value) || 0);
+  });
+  ml.querySelectorAll('[data-dm]').forEach(b => b.onclick = () => { cfg.mats.splice(+b.dataset.dm, 1); renderCfgLists(); });
+
+  const fHer = ($('busqHer')?.value || '').trim().toLowerCase();
+  const hl = $('cfgHerLst'); hl.innerHTML = '';
+  cfg.hers.forEach((h, i) => {
+    if (fHer && !h.nom.toLowerCase().includes(fHer)) return;
+    const r = document.createElement('div'); r.className = 'lrow'; r.style.marginBottom = '5px';
+    r.innerHTML = `<input type="text" value="${h.nom.replace(/"/g, '&quot;')}" data-hi="${i}" data-hk="nom" style="padding:6px;font-size:.8rem"><input type="number" value="${h.pre}" data-hi="${i}" data-hk="pre" style="padding:6px;font-size:.8rem;max-width:105px"><button type="button" class="bm bdel" data-dh="${i}">✕</button>`;
+    hl.appendChild(r);
+  });
+  hl.querySelectorAll('[data-hi]').forEach(el => el.oninput = e => {
+    const i = +e.target.dataset.hi, k = e.target.dataset.hk;
+    cfg.hers[i][k] = k === 'nom' ? e.target.value : (parseFloat(e.target.value) || 0);
+  });
+  hl.querySelectorAll('[data-dh]').forEach(b => b.onclick = () => { cfg.hers.splice(+b.dataset.dh, 1); renderCfgLists(); });
+}
+
+
+$('bMenu').onclick = e => { e.stopPropagation(); $('navMenu').classList.toggle('hd'); };
+document.addEventListener('click', e => {
+  if ($('navMenu') && !$('navMenu').classList.contains('hd') && !$('navMenu').contains(e.target)) $('navMenu').classList.add('hd');
+});
+$('navMenu').querySelectorAll('button').forEach(b => b.onclick = () => {
+  ['secCot','secHis','secCom', 'secOrd', 'secCat', 'secEst', 'secCfg', 'secAdm'].forEach(s => $(s).classList.add('hd'));
+$(b.dataset.sec).classList.remove('hd'); $('navMenu').classList.add('hd'); $('secSub').textContent = b.textContent.replace(/^[^\wÁÉÍÓÚÑáéíóúñ]+/, '');
+});
+
+$('bAddHer').onclick = () => { hers.push({ nom: '', cant: 1, pre: 0 }); renderHers(); };
+['compVal', 'fle', 'mar'].forEach(id => { if ($(id)) $(id).oninput = calc; });
+if ($('compTipo')) $('compTipo').onchange = calc;
+$('bClr').onclick = () => {
+  ['cNom', 'cTel', 'cMue', 'cDir'].forEach(id => $(id).value = '');
+  mods = [{ nom: '', ph: 'Ej: Bajo mesada / Cuerpo principal', abierto: true, pzas: [{ nom: '', matIdx: '', matNom: '', cant: 1, ancho: '', alto: '' }] }];
+  hers = [{ nom: '', cant: 1, pre: 0 }];
+  if ($('compTipo')) $('compTipo').value = 'gs';
+  if ($('compVal')) $('compVal').value = 0;
+  $('fle').value = cfg.fle;
+  $('mar').value = cfg.mar;
+  renderMods();
+  renderHers();
+  calc();
+  bloquearCotizador(false);
+  if ($('badgeNumCot')) {
+    const sig = (typeof proxNumCot === 'number' && proxNumCot > 0)
+      ? proxNumCot
+      : (cots.reduce((m, it) => Math.max(m, Number(it.num) || 0), 0) + 1);
+    $('badgeNumCot').textContent = 'Presupuesto N° ' + fmtCorrelativo(sig);
+  }
+};
+
+
+$('bSav').onclick = async () => {
+  if (!uid) { alert('⚠️ Inicia sesión primero para guardar.'); return; }
+  const cliVal = ($('cNom')?.value || '').trim();
+  const mueVal = ($('cMue')?.value || '').trim();
+  const pzasValidas = obtenerTodasLasPzas(mods).filter(p => (parseFloat(p.cant) || 0) > 0 && (parseFloat(p.ancho) || 0) > 0 && (parseFloat(p.alto) || 0) > 0);
+  const hersValidas = (hers || []).filter(h => (h.nom || '').trim() && (parseFloat(h.cant) || 0) > 0);
+
+  if (!cliVal) {
+    alert('Por favor, ingresa el Nombre del cliente antes de guardar.');
+    $('cNom')?.focus();
+    return;
+  }
+  if (!mueVal) {
+    alert('Por favor, ingresa el Nombre del mueble o proyecto antes de guardar.');
+    $('cMue')?.focus();
+    return;
+  }
+  if (!pzasValidas.length && !hersValidas.length) {
+    alert('Agrega al menos una pieza con medidas (ancho y alto) o un herraje antes de guardar el presupuesto.');
+    return;
+  }
+  try {
+    const modsLimpios = mods.map((m, i) => ({
+      nom: (m.nom || '').trim() || `Módulo ${i + 1}`,
+      pzas: (m.pzas || []).map(p => ({
+        nom: p.nom || '',
+        matNom: p.matNom || '',
+        matIdx: p.matIdx === undefined ? '' : p.matIdx,
+        cant: p.cant || '',
+        ancho: p.ancho || '',
+        alto: p.alto || ''
+      }))
+    }));
+    const pzasLimpias = obtenerTodasLasPzas(modsLimpios);
+    const hersLimpios = hers.map(h => ({ nom: h.nom || '', cant: h.cant || 1, pre: h.pre || 0 }));
+    const numCot = await reservarSiguienteNumero('cot');
+
+    await db.collection('users').doc(uid).collection('cotizaciones').add({
+      ts: Date.now(),
+      fec: new Date().toLocaleDateString('es-PY'),
+      cli: $('cNom').value.trim(),
+      tel: $('cTel').value.trim(),
+      mue: $('cMue').value.trim(),
+      dir: $('cDir').value.trim(),
+      compTipo: $('compTipo')?.value || 'gs',
+      num: numCot,
+      compVal: parseFloat($('compVal')?.value) || 0,
+      fle: $('fle').value,
+      mar: $('mar').value,
+      tot: $('rPre').textContent,
+      pagado: false,
+      mods: modsLimpios,
+      pzas: pzasLimpias,
+      hers: hersLimpios
+    });
+    proxNumCot = numCot + 1;
+    if ($('badgeNumCot')) $('badgeNumCot').textContent = 'Presupuesto N° ' + fmtCorrelativo(proxNumCot);
+
+    $('bClr').click();
+    alert(`✅ Presupuesto N° ${fmtCorrelativo(numCot)} guardado`);
+  } catch (err) {
+    console.error('Error al guardar:', err);
+    alert('❌ No se pudo guardar: ' + err.message);
+  }
+};
+
+$('comFec').valueAsDate = new Date();
+['comCan', 'comPru'].forEach(id => $(id).oninput = () => $('comTot').textContent = gs((parseFloat($('comCan').value) || 0) * (parseFloat($('comPru').value) || 0)));
+$('bAddCom').onclick = async () => {
+  const cat = $('comCat').value.trim(), can = parseFloat($('comCan').value) || 0, pru = parseFloat($('comPru').value) || 0;
+  if (!cat || can <= 0 || pru <= 0) { alert('Completa concepto, cantidad y precio'); return; }
+  await db.collection('users').doc(uid).collection('compras').add({ ts: Date.now(), fec: $('comFec').value, cat, can, pru, mon: can * pru });
+  $('comCat').value = ''; $('comCan').value = '1'; $('comPru').value = ''; $('comTot').textContent = 'Gs. 0';
+};
+$('bAddMat').onclick = () => {
+  const nom = $('newMatNom').value.trim(), pre = parseFloat($('newMatPre').value) || 0;
+  const anc = parseFloat($('newMatAnc').value) || 275, alt = parseFloat($('newMatAlt').value) || 183;
+  if (!nom) return;
+  cfg.mats.push({ nom, anc, alt, pre });
+  $('newMatNom').value = ''; $('newMatPre').value = ''; $('newMatAnc').value = '275'; $('newMatAlt').value = '183';
+  renderCfgLists();
+};
+$('bAddHerCfg').onclick = () => { const nom = $('newHerNom').value.trim(), pre = parseFloat($('newHerPre').value) || 0; if (!nom) return; cfg.hers.push({ nom, pre }); $('newHerNom').value = ''; $('newHerPre').value = ''; renderCfgLists(); };
+if ($('busqMat')) $('busqMat').oninput = renderCfgLists;
+if ($('busqHer')) $('busqHer').oninput = renderCfgLists;
+
+$('bSavCat').onclick = async () => {
+  await db.collection('users').doc(uid).collection('settings').doc('general').set(cfg);
+  renderMods(); renderHers(); calc();
+  alert('✅ Catálogo de tableros e insumos guardado.');
+};
+$('bSavCfg').onclick = async () => {
+  cfg.tallNom = $('cfgTallNom').value.trim() || 'Cotizador de Muebles';
+  cfg.tallTel = $('cfgTallTel').value.trim();
+  cfg.fle = parseFloat($('cfgFle').value) || 0;
+  cfg.desp = parseFloat($('cfgDesp').value) || 0;
+  cfg.mar = parseFloat($('cfgMar').value) || 0;
+  await db.collection('users').doc(uid).collection('settings').doc('general').set(cfg);
+  aplicarCfgUI(); calc(); alert('✅ Configuración del taller y precios guardados.');
+};
+
+if ($('bResetNum')) {
+  $('bResetNum').onclick = async () => {
+    if (!uid) return;
+    if (!confirm('¿Reiniciar el contador correlativo para que el próximo presupuesto sea el N° 0001?')) return;
+    await db.collection('users').doc(uid).collection('settings').doc('contadores').set({ cotNum: 0, ordNum: 0 }, { merge: true });
+    proxNumCot = 1;
+    proxNumOrd = 1;
+    if ($('badgeNumCot')) $('badgeNumCot').textContent = 'Presupuesto N° ' + fmtCorrelativo(1);
+    alert('✅ Contador reiniciado a N° 0001.');
+  };
+}
+
+
+function iniciarAdminLicencias() {
+  const DIA_MS = 24 * 60 * 60 * 1000;
+  const fmtFecha = (ms) => ms ? new Date(ms).toLocaleDateString('es-PY') : '—';
+  const fmtUltUso = (ms) => ms
+    ? new Date(ms).toLocaleString('es-PY', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
+    : 'Sin ingreso aún';
+
+  if ($('bAddLic')) {
+    $('bAddLic').onclick = async () => {
+      const nom = ($('admCliNom')?.value || '').trim();
+      const tel = ($('admCliTel')?.value || '').trim();
+      const plan = $('admCliPlan')?.value || 'unico';
+      const mail = ($('admCliMail')?.value || '').trim().toLowerCase();
+      if (!mail || !mail.includes('@')) { alert('Ingresa un correo Gmail válido.'); return; }
+
+      const ahora = Date.now();
+      const datos = {
+        nombre: nom || 'Cliente',
+        tel: tel,
+        email: mail,
+        plan: plan,
+        activo: true,
+        fechaActivacion: ahora,
+        fechaCorte: plan === 'suscripcion' ? (ahora + 30 * DIA_MS) : null,
+        creado: ahora
+      };
+
+      try {
+        await db.collection('licencias').doc(mail).set(datos, { merge: true });
+        if ($('admCliNom')) $('admCliNom').value = '';
+        if ($('admCliTel')) $('admCliTel').value = '';
+        if ($('admCliMail')) $('admCliMail').value = '';
+      } catch (e) {
+        alert('Error al autorizar licencia: ' + e.message);
+      }
+    };
+  }
+
+  let ultDocsLic = [];
+
+  const renderListaLicencias = () => {
+    const lst = $('admLicLst');
+    if (!lst) return;
+    lst.innerHTML = '';
+    if (!ultDocsLic.length) {
+      lst.innerHTML = '<div style="font-size:.8rem;color:#78716c">Aún no hay clientes registrados.</div>';
+      return;
+    }
+    const ahora = Date.now();
+
+    ultDocsLic.forEach(({ mail, d }) => {
+      const esSusc = d.plan === 'suscripcion';
+      const vencida = esSusc && d.fechaCorte && ahora > d.fechaCorte;
+
+      if (vencida && d.activo !== false) {
+        db.collection('licencias').doc(mail).update({ activo: false }).catch(() => {});
+      }
+
+      const activo = d.activo !== false && !vencida;
+      const diasRest = esSusc && d.fechaCorte ? Math.ceil((d.fechaCorte - ahora) / DIA_MS) : null;
+
+      const estaOnline = d.online === true && d.ultimaActividad && (ahora - d.ultimaActividad < 120000);
+      const ultVezTxt = fmtUltUso(d.ultimaActividad);
+      const badgePresencia = estaOnline
+        ? '<span style="background:#dcfce7;color:#15803d;border:1px solid #86efac;padding:2px 7px;border-radius:99px;font-size:.71rem;font-weight:700">🟢 Online</span>'
+        : `<span style="background:#f5f5f4;color:#78716c;border:1px solid #e7e5e4;padding:2px 7px;border-radius:99px;font-size:.71rem;font-weight:600" title="Última actividad: ${ultVezTxt}">⚪ Offline</span>`;
+
+      let badgeEstado = activo
+        ? '<span style="background:#dcfce7;color:#166534;padding:2px 7px;border-radius:6px;font-size:.72rem">✅ ACTIVO</span>'
+        : `<span style="background:#fee2e2;color:#991b1b;padding:2px 7px;border-radius:6px;font-size:.72rem">${vencida ? '⏰ VENCIDO' : '⛔ PAUSADO'}</span>`;
+
+      let infoPlan = esSusc
+        ? `<div style="font-size:.76rem;color:#78350f;background:#fef3c7;padding:4px 8px;border-radius:6px;margin:4px 0">
+             📅 <strong>Suscripción 30d</strong> &nbsp;|&nbsp; Activación: <strong>${fmtFecha(d.fechaActivacion || d.creado)}</strong> &nbsp;|&nbsp; Corte: <strong>${fmtFecha(d.fechaCorte)}</strong>
+             ${diasRest !== null ? (diasRest > 0 ? ` <span style="color:#166534">(${diasRest}d restantes)</span>` : ` <span style="color:#991b1b">(Vencida)</span>`) : ''}
+             &nbsp;|&nbsp; 🕒 Últ. uso: <strong>${ultVezTxt}</strong>
+           </div>`
+        : `<div style="font-size:.76rem;color:#065f46;background:#ecfdf5;padding:4px 8px;border-radius:6px;margin:4px 0">
+             ♾️ <strong>Pago Único (Indefinido)</strong> &nbsp;|&nbsp; Activación: <strong>${fmtFecha(d.fechaActivacion || d.creado)}</strong>
+             &nbsp;|&nbsp; 🕒 Últ. uso: <strong>${ultVezTxt}</strong>
+           </div>`;
+
+      const btnRenovar = esSusc
+        ? `<button type="button" class="bm" style="background:#0284c7" data-renlic="${mail}" data-corte="${d.fechaCorte || 0}">🔄 Renovar +30d</button>`
+        : '';
+
+      const btnCambiarPlan = `<button type="button" class="bm" style="background:#6d28d9" data-planlic="${mail}" data-plan="${esSusc ? 'suscripcion' : 'unico'}">${esSusc ? '♾️ Pasar a Único' : '📅 Pasar a Suscripción'}</button>`;
+
+      const it = document.createElement('div');
+      it.className = 'hit';
+      it.style.marginBottom = '8px';
+      it.innerHTML = `
+        <div style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-weight:700;color:#78350f">🏢 ${d.nombre || 'Cliente'}</span>
+            <span style="font-size:.8rem;color:#57534e">📧 ${mail}${d.tel ? ' &nbsp;|&nbsp; 📞 ' + d.tel : ''}</span>
+          </div>
+          <span style="display:inline-flex;align-items:center;gap:5px">${badgePresencia}${badgeEstado}</span>
+        </div>
+        <div style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:4px">
+          <div style="flex:1 1 320px">${infoPlan}</div>
+          <div class="hacts" style="margin:0">
+            ${btnRenovar}
+            <button type="button" class="bm" style="background:${activo ? '#d97706' : '#16a34a'}" data-toglic="${mail}" data-act="${activo ? '1' : '0'}">${activo ? '⏸️ Pausar' : '▶️ Activar'}</button>
+            ${btnCambiarPlan}
+            <button type="button" class="bm bdel" data-dellic="${mail}">🗑️ Eliminar</button>
+            <button type="button" class="bm bwa" data-walic="${mail}" data-wanom="${(d.nombre || 'Cliente').replace(/"/g, '&quot;')}" data-watel="${(d.tel || '').replace(/"/g, '&quot;')}" data-waplan="${esSusc ? 'suscripcion' : 'unico'}" data-wacorte="${fmtFecha(d.fechaCorte)}">💬 Enviar Acceso</button>
+          </div>
+        </div>
+      `;
+      lst.appendChild(it);
+    });
+
+    lst.querySelectorAll('[data-renlic]').forEach(b => b.onclick = () => {
+      const mail = b.dataset.renlic;
+      const corteActual = parseInt(b.dataset.corte, 10) || 0;
+      const base = Math.max(Date.now(), corteActual);
+      const nuevoCorte = base + 30 * DIA_MS;
+      db.collection('licencias').doc(mail).update({
+        activo: true,
+        plan: 'suscripcion',
+        fechaCorte: nuevoCorte
+      });
+    });
+
+    lst.querySelectorAll('[data-planlic]').forEach(b => b.onclick = () => {
+      const mail = b.dataset.planlic;
+      const actual = b.dataset.plan;
+      const ahora = Date.now();
+      if (actual === 'suscripcion') {
+        db.collection('licencias').doc(mail).update({ plan: 'unico', fechaCorte: null, activo: true });
+      } else {
+        db.collection('licencias').doc(mail).update({ plan: 'suscripcion', fechaActivacion: ahora, fechaCorte: ahora + 30 * DIA_MS, activo: true });
+      }
+    });
+
+    lst.querySelectorAll('[data-toglic]').forEach(b => b.onclick = () => {
+      db.collection('licencias').doc(b.dataset.toglic).update({ activo: b.dataset.act !== '1' });
+    });
+
+    lst.querySelectorAll('[data-dellic]').forEach(b => b.onclick = () => {
+      if (confirm('¿Eliminar acceso de ' + b.dataset.dellic + '?')) {
+        db.collection('licencias').doc(b.dataset.dellic).delete();
+      }
+    });
+
+    lst.querySelectorAll('[data-walic]').forEach(b => b.onclick = () => {
+      const mail = b.dataset.walic;
+      const nom = b.dataset.wanom || 'Cliente';
+      const esSusc = b.dataset.waplan === 'suscripcion';
+      const corteTxt = b.dataset.wacorte || '';
+      let telRaw = b.dataset.watel || '';
+      if (!telRaw) {
+        const ingresado = prompt(`Ingresa el número de WhatsApp de ${nom} (o deja en blanco para elegir el contacto en WhatsApp):`, '');
+        if (ingresado === null) return;
+        telRaw = ingresado.trim();
+        if (telRaw) db.collection('licencias').doc(mail).update({ tel: telRaw });
+      }
+      let tel = telRaw.replace(/\D/g, '');
+      if (tel.startsWith('0')) tel = '595' + tel.slice(1);
+      else if (tel.length === 9 && tel.startsWith('9')) tel = '595' + tel;
+
+      const linkApp = window.location.origin + window.location.pathname;
+      const detPlan = esSusc ? `\n📅 *Plan Suscripción vigente hasta:* ${corteTxt}` : `\n♾️ *Plan:* Acceso Vitalicio (Pago Único)`;
+      const msg = `Hola *${nom}*, ¡ya tienes habilitado tu acceso al *Cotizador de Muebles a Medida*! 🪚✨${detPlan}\n\n🔗 *1. Abre este enlace en Chrome:*\n${linkApp}\n\n📧 *2. Inicia sesión con Google usando:* ${mail}\n\n📲 *3. Toca "Instalar App"* arriba (o en ⋮ → _Instalar aplicación_) para tenerlo directo en tu pantalla principal.`;
+      const url = 'https://' + 'api.whatsapp' + '.com/send?' + (tel ? 'phone=' + tel + '&' : '') + 'text=' + encodeURIComponent(msg);
+      window.open(url, '_blank');
+    });
+  };
+
+  db.collection('licencias').onSnapshot(snap => {
+    ultDocsLic = snap.docs.map(doc => ({ mail: doc.id, d: doc.data() }));
+    renderListaLicencias();
+  });
+
+  if (window._timerPresenciaAdmin) clearInterval(window._timerPresenciaAdmin);
+  window._timerPresenciaAdmin = setInterval(renderListaLicencias, 30000);
+}
+renderMods(); calc();
+});
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(() => {});
+}
+(function configurarPWA() {
+  function crearIconoPNG(size) {
+    const c = document.createElement('canvas');
+    c.width = size; c.height = size;
+    const ctx = c.getContext('2d');
+    const r = size * 0.22;
+    ctx.fillStyle = '#78350f';
+    ctx.beginPath();
+    ctx.roundRect(0, 0, size, size, r);
+    ctx.fill();
+
+    ctx.fillStyle = '#92400e';
+    const pad = size * 0.08;
+    ctx.beginPath();
+    ctx.roundRect(pad, pad, size - pad * 2, size - pad * 2, r * 0.75);
+    ctx.fill();
+
+    // Dibujo de serrucho/carpintería centrado
+    ctx.save();
+    ctx.translate(size * 0.5, size * 0.5);
+    ctx.rotate(-Math.PI / 5);
+    ctx.fillStyle = '#fef3c7';
+    ctx.fillRect(-size * 0.28, -size * 0.06, size * 0.44, size * 0.12);
+    ctx.fillStyle = '#f59e0b';
+    for (let x = -size * 0.26; x < size * 0.12; x += size * 0.075) {
+      ctx.beginPath();
+      ctx.moveTo(x, size * 0.06);
+      ctx.lineTo(x + size * 0.038, size * 0.11);
+      ctx.lineTo(x + size * 0.075, size * 0.06);
+      ctx.fill();
+    }
+    ctx.fillStyle = '#d97706';
+    ctx.beginPath();
+    ctx.roundRect(size * 0.14, -size * 0.09, size * 0.15, size * 0.18, size * 0.04);
+    ctx.fill();
+    ctx.fillStyle = '#78350f';
+    ctx.beginPath();
+    ctx.arc(size * 0.22, 0, size * 0.032, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    return c.toDataURL('image/png');
+  }
+
+  const icon192 = crearIconoPNG(192);
+  const icon512 = crearIconoPNG(512);
+
+  const linkApple = document.createElement('link');
+  linkApple.rel = 'apple-touch-icon';
+  linkApple.href = icon192;
+  document.head.appendChild(linkApple);
+
+  const manifest = {
+    name: 'Cotizador de Muebles a Medida',
+    short_name: 'Cotizador Muebles',
+    description: 'Presupuestos, despiece y planos de corte 2D para carpintería',
+    start_url: window.location.origin + '/',
+    scope: window.location.origin + '/',
+    display: 'standalone',
+    background_color: '#fafaf9',
+    theme_color: '#78350f',
+    orientation: 'portrait',
+    icons: [
+      { src: icon192, sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+      { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+    ]
+  };
+
+  const blob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+  const linkMan = document.createElement('link');
+  linkMan.rel = 'manifest';
+  linkMan.href = URL.createObjectURL(blob);
+  document.head.appendChild(linkMan);
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  }
+})();
+
+let deferredPromptPWA = null;
+const esStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+const esIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+const esEnWhatsApp = /FBAN|FBAV|Instagram|WhatsApp|wv/i.test(navigator.userAgent);
+
+if (document.getElementById('pwaBanner')) {
+  if (esStandalone) {
+    document.getElementById('pwaBanner').style.display = 'none';
+  } else if (esIOS) {
+    if (document.getElementById('pwaSubTxt')) document.getElementById('pwaSubTxt').textContent = 'En iPhone: toca Compartir ⬆️ abajo y elige "Agregar a inicio".';
+    if (document.getElementById('bInstalarPWA')) document.getElementById('bInstalarPWA').style.display = 'none';
+  } else if (esEnWhatsApp) {
+    if (document.getElementById('pwaSubTxt')) document.getElementById('pwaSubTxt').textContent = 'Estás dentro de WhatsApp: toca ⋮ arriba → "Abrir en Chrome" para instalarla.';
+  }
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPromptPWA = e;
+  const b = document.getElementById('pwaBanner');
+  if (!esStandalone && b) {
+    b.style.display = 'block';
+    const sub = document.getElementById('pwaSubTxt');
+    if (sub) sub.textContent = 'Toca el botón dorado para instalar la app en tu pantalla principal.';
+  }
+});
+
+window.instalarAppAhora = async function() {
+  if (deferredPromptPWA) {
+    deferredPromptPWA.prompt();
+    const { outcome } = await deferredPromptPWA.userChoice;
+    if (outcome === 'accepted' && document.getElementById('pwaBanner')) {
+      document.getElementById('pwaBanner').style.display = 'none';
+    }
+    deferredPromptPWA = null;
+  } else if (esEnWhatsApp) {
+    alert('1. Toca los 3 puntos (⋮) arriba a la derecha.\n2. Elige "Abrir en Chrome".\n3. Luego toca "⬇️ Instalar App" o ⋮ → "Instalar aplicación".');
+  } else {
+    alert('Para instalar en tu pantalla principal:\n1. Toca los 3 puntos (⋮) arriba a la derecha en Chrome.\n2. Selecciona "Instalar aplicación" (o "Agregar a la pantalla principal").');
+  }
+};
+
+window.addEventListener('appinstalled', () => {
+  if (document.getElementById('pwaBanner')) document.getElementById('pwaBanner').style.display = 'none';
+});
+
+
+</script>
+</body>
+</html>
